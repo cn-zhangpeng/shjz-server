@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet id="1590979742" author="华夏紫穹">
+        <comment>初始化数据</comment>
+        <insert tableName="user">
+            <column name="id" value="1" />
+            <column name="username" value="peng.zhang" />
+            <column name="password" value="e10adc3949ba59abbe56e057f20f883e" />
+            <column name="nickname" value="华夏☆紫穹" />
+            <column name="sex" value="1" />
+            <column name="birthday" value="1995-05-09" />
+            <column name="avatar" value="https://oscimg.oschina.net/oscnet/up-4e4497d225dafa9591118c847760fa14.jpeg!/both/200x200?t=1517472252000" />
+            <column name="maxim" value="我若成佛，天下无魔，我若成魔，佛奈我何！" />
+            <column name="phone" value="15611637333" />
+            <column name="email" value="zhangpeng__cn@163.com" />
+            <column name="qq" value="2430168648" />
+            <column name="location" value="北京海淀" />
+            <column name="create_time" value="2020-06-01 10:47:00" />
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
