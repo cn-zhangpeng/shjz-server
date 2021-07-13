@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author 华夏紫穹
  */
 @SpringBootApplication
-@MapperScan("com.myspace.server.*.mapper")
+@MapperScan("com.shjz.zp95sky.shjz.server.*.mapper")
 public class ServerApplication {
 
 	public static void main(String[] args) {
