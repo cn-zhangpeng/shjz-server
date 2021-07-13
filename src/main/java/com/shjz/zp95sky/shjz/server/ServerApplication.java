@@ -10,10 +10,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 @MapperScan("com.myspace.server.*.mapper")
-public class MySpaceServerApplication {
+public class ServerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MySpaceServerApplication.class, args);
+		SpringApplication.run(ServerApplication.class, args);
 	}
 
 }
