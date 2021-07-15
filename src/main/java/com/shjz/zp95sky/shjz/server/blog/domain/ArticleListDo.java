@@ -1,5 +1,6 @@
 package com.shjz.zp95sky.shjz.server.blog.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
@@ -38,6 +39,7 @@ public class ArticleListDo {
     private Boolean isOriginal;
 
     @ApiModelProperty("文章创建时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime createTime;
 
 }
