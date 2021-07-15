@@ -1,5 +1,6 @@
 package com.shjz.zp95sky.shjz.server.blog.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.shjz.zp95sky.shjz.server.blog.domain.ArticleDetailDo;
 import com.shjz.zp95sky.shjz.server.blog.domain.ArticleListDo;
 import com.shjz.zp95sky.shjz.server.blog.dto.GetArticleListByKeywordDto;
@@ -8,12 +9,13 @@ import com.shjz.zp95sky.shjz.server.blog.entity.ArticleDetail;
 import com.shjz.zp95sky.shjz.server.blog.entity.ArticleCategory;
 import com.shjz.zp95sky.shjz.server.common.entity.CustomPage;
 import com.shjz.zp95sky.shjz.server.common.response.BasePageResult;
+import com.shjz.zp95sky.shjz.server.common.response.BaseResult;
 
 /**
  * 文章业务
  * @author 华夏紫穹
  */
-public interface ArticleDetailService {
+public interface ArticleDetailService extends IService<ArticleDetail> {
 
     /**
      * 根据分页信息查询文章列表
@@ -57,5 +59,13 @@ public interface ArticleDetailService {
      * @return 分页及文章列表
      */
     BasePageResult<ArticleListDo> getArticleListByKeyword(GetArticleListByKeywordDto keywordDto);
+
+    /**
+     * 修改文章是否原创标识
+     * @param articleId 文章ID
+     * @param isOriginal 是否原创，true：原创，false：非原创
+     * @return 修改结果
+     */
+    BaseResult<Void> changeOriginal(Long articleId, Boolean isOriginal);
 
 }

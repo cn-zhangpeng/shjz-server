@@ -4,6 +4,7 @@ import cn.hutool.core.lang.Snowflake;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.shjz.zp95sky.shjz.server.blog.domain.ArticleDetailDo;
 import com.shjz.zp95sky.shjz.server.blog.domain.ArticleListDo;
 import com.shjz.zp95sky.shjz.server.blog.dto.GetArticleListByKeywordDto;
@@ -21,6 +22,8 @@ import com.shjz.zp95sky.shjz.server.blog.mapper.CategoryMapper;
 import com.shjz.zp95sky.shjz.server.blog.service.ArticleDetailService;
 import com.shjz.zp95sky.shjz.server.common.entity.CustomPage;
 import com.shjz.zp95sky.shjz.server.common.response.BasePageResult;
+import com.shjz.zp95sky.shjz.server.common.response.BaseResult;
+import com.shjz.zp95sky.shjz.server.common.response.ModelResultUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,7 +40,8 @@ import java.util.stream.Collectors;
  */
 @Service
 @RequiredArgsConstructor(onConstructor = @__({ @Autowired}))
-public class ArticleDetailServiceImpl implements ArticleDetailService {
+public class ArticleDetailServiceImpl extends ServiceImpl<ArticleDetailMapper, ArticleDetail>
+        implements ArticleDetailService {
 
     private final ArticleDetailEsService articleDetailEsService;
     private final ArticleDetailMapper articleDetailMapper;
@@ -143,6 +147,15 @@ public class ArticleDetailServiceImpl implements ArticleDetailService {
         List<ArticleListDo> articleListDoList = handleArticleListData(orderedArticleDetailList);
 
         return BasePageResult.getInstance(page, size, articleInfo.getTotal(), articleListDoList);
+    }
+
+    @Override
+    public BaseResult<Void> changeOriginal(Long articleId, Boolean isOriginal) {
+        ArticleDetail articleDetail = ArticleDetail.builder()
+                .id(articleId).isOriginal(isOriginal)
+                .build();
+        updateById(articleDetail);
+        return ModelResultUtil.buildResultSuccess();
     }
 
     private List<ArticleDetail> orderArticleListByArticleIdList(List<ArticleDetail> articleDetailList, List<Long> articleIdList) {

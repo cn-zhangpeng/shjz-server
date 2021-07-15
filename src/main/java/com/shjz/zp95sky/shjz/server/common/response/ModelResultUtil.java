@@ -26,6 +26,15 @@ public class ModelResultUtil {
         return result;
     }
 
+    public static <T> BaseResult<T> buildResultSuccess() {
+        BaseResult<T> result = new BaseResult<>();
+        ResponseCodeEnum response = ResponseCodeEnum.SUCCESS;
+        result.setCode(response.getCode());
+        result.setMsg(response.getMsg());
+        result.setData(null);
+        return result;
+    }
+
     public static <T> BaseResult<BasePageResult<T>> buildPageResultSuccess(Integer page, Integer pageSize, Long total, List<T> dataList) {
         BasePageResult<T> pageResult = BasePageResult.getInstance(page, pageSize, total, dataList);
         return buildResultSuccess(pageResult);

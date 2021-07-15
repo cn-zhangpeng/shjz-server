@@ -2,6 +2,7 @@ package com.shjz.zp95sky.shjz.server.blog.controller;
 
 import com.shjz.zp95sky.shjz.server.blog.domain.ArticleDetailDo;
 import com.shjz.zp95sky.shjz.server.blog.domain.ArticleListDo;
+import com.shjz.zp95sky.shjz.server.blog.dto.ChangeOriginalDto;
 import com.shjz.zp95sky.shjz.server.blog.dto.GetArticleListByKeywordDto;
 import com.shjz.zp95sky.shjz.server.blog.dto.PublishArticleDto;
 import com.shjz.zp95sky.shjz.server.common.entity.CustomPage;
@@ -92,6 +93,13 @@ public class ArticleDetailController {
     public BaseResult<BasePageResult<ArticleListDo>> getArticleListByKeyword(@ModelAttribute GetArticleListByKeywordDto keywordDto) {
         BasePageResult<ArticleListDo> pageResult = articleDetailService.getArticleListByKeyword(keywordDto);
         return ModelResultUtil.buildPageResultSuccess(pageResult);
+    }
+
+    @ApiOperation("修改文章原创标识")
+    @ApiImplicitParam(name = "articleId", value = "文章ID", required = true, paramType = "path", dataTypeClass = String.class)
+    @PatchMapping("/article/{articleId}/changeOriginal")
+    public BaseResult<Void> changeOriginal(@PathVariable Long articleId, @RequestBody ChangeOriginalDto originalDto) {
+        return articleDetailService.changeOriginal(articleId, originalDto.getIsOriginal());
     }
 
 }
