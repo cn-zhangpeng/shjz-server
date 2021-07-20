@@ -101,7 +101,7 @@ public class LoginServiceImpl implements LoginService {
     }
 
     private void saveAuthTokenToRedis(Long userId, String token) {
-        redisUtil.set(RedisConstants.OPERATOR_AUTH_TOKEN_PRE + token, userId, 1, TimeUnit.DAYS);
+        redisUtil.set(RedisConstants.OPERATOR_AUTH_TOKEN_PRE + token, userId, jwtConfiguration.getExpm(), TimeUnit.MINUTES);
     }
 
     private void removeAuthTokenFromRedis(String token) {

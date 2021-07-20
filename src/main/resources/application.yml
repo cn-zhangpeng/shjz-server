@@ -9,55 +9,28 @@ spring:
   banner:
     location: banner.txt
   datasource:
-    type: com.alibaba.druid.pool.DruidDataSource
-    druid:
-      # 数据库连接配置
-      url: jdbc:mysql://localhost:3306/shjz?useSSL=true&useUnicode=true&characterEncoding=UTF-8
-      username: root
-      password: 12345678
-      ## 连接池配置
-      ## 初始化大小，最大数量，最小数量
-      initial-size: 10
-      max-active: 50
-      min-idle: 10
-      ## 连接超时时间
-      max-wait: 60000
-      ## 检测空闲连接的时间间隔配置，决定是否关闭连接，单位为毫秒
-      time-between-eviction-runs-millis: 60000
-      ## 连接的最小空闲时间，单位为毫秒
-      min-evictable-idle-time-millis: 300000
-      ## 检测连接是否有效的 SQL
-      validation-query: SELECT 1
-      validation-query-timeout: 3000
-      test-on-borrow: false
-      test-on-return: false
-      test-while-idle: true
-      ## 配置 PSCache，配置每个连接 PSCache 的大小
-      pool-prepared-statements: true
-      max-pool-prepared-statement-per-connection-size: 20
-      ## 监控 filter 配置，如果删除该配置，sql 监控将失效，使用 wall 配置防火墙
-      filters: config,stat,wall,slf4j
-      # sql 监控
-      filter:
-        stat:
-          enabled: true
-          log-slow-sql: true
-          slow-sql-millis: 10000
-          merge-sql: true
-      # WebStatFilter
-      web-stat-filter:
-        enabled: true
-        url-pattern: /*
-        exclusions: /druid/*
-        session-stat-enable: true
-        profile-enable: true
-      # StatViewServlet
-      stat-view-servlet:
-        enabled: true
-        login-username: root
-        login-password: 12345678
-      # spring 监控
-      aop-patterns: com.myspace.serve.*
+    type: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/luanniao?useUnicode=true&characterEncoding=utf-8&useSSL=true
+    username: root
+    password: 12345678
+    # Hikari 连接池配置
+    # 最小空闲连接数量
+    hikari:
+      minimum-idle: 5
+      # 空闲连接存活最大时间，默认600000（10分钟）
+      idle-timeout: 180000
+      # 连接池最大连接数，默认是10
+      maximum-pool-size: 10
+      # 此属性控制从池返回的连接的默认自动提交行为,默认值：true
+      auto-commit: true
+      # 连接池名称
+      pool-name: luanniao
+      # 此属性控制池中连接的最长生命周期，值0表示无限生命周期，默认1800000即30分钟
+      max-lifetime: 1800000
+      # 数据库连接超时时间,默认30秒，即30000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
   # liquibase 配置
   liquibase:
     enabled: true
