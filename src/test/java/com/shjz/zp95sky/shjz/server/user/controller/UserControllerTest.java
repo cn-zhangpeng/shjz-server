@@ -11,7 +11,7 @@ import javax.annotation.Resource;
 
 /**
  * 用户测试
- * @author 华夏紫穹
+ * @author 山海紫穹
  */
 @MockTestAnnotation
 public class UserControllerTest {

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * 异常处理
- * @author 华夏紫穹
+ * @author 山海紫穹
  */
 @ControllerAdvice
 @Slf4j

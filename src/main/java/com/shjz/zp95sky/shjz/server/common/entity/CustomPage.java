@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 /**
- * @author 华夏紫穹
+ * @author 山海紫穹
  */
 @ApiModel(value = "CustomPage 分页信息", description = "分页信息")
 @Data
@@ -19,6 +19,6 @@ public class CustomPage {
     private Integer page;
 
     @ApiModelProperty("查询条数")
-    private Integer size;
+    private Integer pageSize;
 
 }

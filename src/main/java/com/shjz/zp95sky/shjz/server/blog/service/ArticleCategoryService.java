@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * 文章类型业务
- * @author 华夏紫穹
+ * @author 山海紫穹
  */
 public interface ArticleCategoryService extends IService<ArticleCategory> {
 

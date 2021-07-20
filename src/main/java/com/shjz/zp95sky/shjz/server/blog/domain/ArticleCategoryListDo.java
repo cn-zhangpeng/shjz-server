@@ -10,7 +10,7 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 /**
- * @author 华夏紫穹
+ * @author 山海紫穹
  */
 @ApiModel(value = "ArticleCategoryListDo 文章类型信息", description = "文章类型信息")
 @Data

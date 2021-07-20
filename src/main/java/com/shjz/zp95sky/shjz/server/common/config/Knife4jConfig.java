@@ -6,20 +6,20 @@ import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.oas.annotations.EnableOpenApi;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * Swagger 配置文件
- * @author 华夏紫穹
+ * @author 山海紫穹
  */
 @Configuration
-@EnableSwagger2
+@EnableOpenApi
 @EnableKnife4j
-public class SwaggerConfiguration {
+public class Knife4jConfig {
 
     @Bean(value = "defaultApi")
     public Docket defaultApi() {
@@ -29,7 +29,7 @@ public class SwaggerConfiguration {
                 .groupName("1.0版本")
                 .select()
                 //这里指定Controller扫描包路径
-                .apis(RequestHandlerSelectors.basePackage("com.myspace.server"))
+                .apis(RequestHandlerSelectors.basePackage("com.shjz.zp95sky.shjz.server"))
                 .paths(PathSelectors.any())
                 .build();
     }
@@ -38,7 +38,7 @@ public class SwaggerConfiguration {
         return new ApiInfoBuilder()
                 .title("山海芥子 API")
                 .description("个人平台 API 文档")
-                .contact(new Contact("华夏紫穹", "http://space.zp95sky.cn/", "zp95sky@163.com"))
+                .contact(new Contact("山海紫穹", "http://zp95sky.cn/", "zp95sky@163.com"))
                 .version("1.0")
                 .build();
     }

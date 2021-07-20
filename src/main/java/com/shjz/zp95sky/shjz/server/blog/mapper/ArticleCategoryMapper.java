@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 /**
  * 文章类型
- * @author 华夏紫穹
+ * @author 山海紫穹
  */
 @Repository
 public interface ArticleCategoryMapper extends BaseMapper<ArticleCategory> {

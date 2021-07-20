@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 /**
- * @author 华夏紫穹
+ * @author 山海紫穹
  */
 @EqualsAndHashCode(callSuper = true)
 @ApiModel(value = "AddCategoryDto 文章类型信息", description = "文章类型信息")

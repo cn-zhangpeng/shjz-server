@@ -21,7 +21,7 @@ import java.util.List;
 
 /**
  * 文章类型业务实现
- * @author 华夏紫穹
+ * @author 山海紫穹
  */
 @Service
 @RequiredArgsConstructor(onConstructor = @__({ @Autowired}))

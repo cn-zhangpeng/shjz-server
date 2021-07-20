@@ -1,4 +1,4 @@
-package com.shjz.zp95sky.shjz.server.common.jwt;
+package com.shjz.zp95sky.shjz.server.auth.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Claims;

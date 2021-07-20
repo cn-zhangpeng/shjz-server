@@ -25,9 +25,9 @@ public class LoginUtil {
         return getSession("peng.zhang", "123456");
     }
 
-    public HttpSession getSession(String userName, String password) throws Exception {
+    public HttpSession getSession(String username, String password) throws Exception {
         LoginDto loginDto = new LoginDto();
-        loginDto.setUserName(userName);
+        loginDto.setUsername(username);
         loginDto.setPassword(password);
 
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/login")

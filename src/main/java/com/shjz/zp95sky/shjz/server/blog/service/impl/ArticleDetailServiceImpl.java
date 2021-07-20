@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
 
 /**
  * 文章详情业务实现
- * @author 华夏紫穹
+ * @author 山海紫穹
  */
 @Service
 @RequiredArgsConstructor(onConstructor = @__({ @Autowired}))
@@ -43,19 +43,19 @@ public class ArticleDetailServiceImpl extends ServiceImpl<ArticleDetailMapper, A
     @Override
     public BaseResult<List<ArticleListDo>> getArticleList(CustomPage customPage) {
         Integer page = customPage.getPage();
-        Integer size = customPage.getSize();
+        Integer pageSize = customPage.getPageSize();
 
-        IPage<ArticleDetail> pageResult = selectArticleList(page, size);
-        return buildArticleListDo(page, size, pageResult.getTotal(), pageResult.getRecords());
+        IPage<ArticleDetail> pageResult = selectArticleList(page, pageSize);
+        return buildArticleListDo(page, pageSize, pageResult.getTotal(), pageResult.getRecords());
     }
 
     @Override
     public BaseResult<List<ArticleListDo>> getArticleListByCategory(Long categoryId, CustomPage customPage) {
         Integer page = customPage.getPage();
-        Integer size = customPage.getSize();
+        Integer pageSize = customPage.getPageSize();
 
-        IPage<ArticleDetail> pageResult = selectArticleListByCategory(page, size, categoryId);
-        return buildArticleListDo(page, size, pageResult.getTotal(), pageResult.getRecords());
+        IPage<ArticleDetail> pageResult = selectArticleListByCategory(page, pageSize, categoryId);
+        return buildArticleListDo(page, pageSize, pageResult.getTotal(), pageResult.getRecords());
     }
 
     @Override
@@ -83,14 +83,14 @@ public class ArticleDetailServiceImpl extends ServiceImpl<ArticleDetailMapper, A
     @Override
     public BaseResult<List<ArticleListDo>> getArticleListByKeyword(GetArticleListByKeywordDto keywordDto) {
         Integer page = keywordDto.getPage();
-        Integer size = keywordDto.getSize();
+        Integer pageSize = keywordDto.getPageSize();
 
         // 模糊查询文章列表
         LambdaQueryWrapper<ArticleDetail> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.like(ArticleDetail::getArticleTitle, keywordDto.getKeyword());
-        IPage<ArticleDetail> pageResult = selectArticleList(page, size, queryWrapper);
+        IPage<ArticleDetail> pageResult = selectArticleList(page, pageSize, queryWrapper);
 
-        return buildArticleListDo(page, size, pageResult.getTotal(), pageResult.getRecords());
+        return buildArticleListDo(page, pageSize, pageResult.getTotal(), pageResult.getRecords());
     }
 
     @Override
@@ -117,7 +117,7 @@ public class ArticleDetailServiceImpl extends ServiceImpl<ArticleDetailMapper, A
                 .articleTitle(articleDto.getArticleTitle())
                 .articleSummary(subArticleSummary(articleDto.getArticleContent()))
                 .articleContent(articleDto.getArticleContent())
-                .articleTags(String.join(Constants.ARTICLE_TAG_DELIMITER, articleDto.getArticleTagList()))
+                .articleTags(String.join(Constants.COMMA_DELIMITER, articleDto.getArticleTagList()))
                 .isOriginal(articleDto.getIsOriginal()).createTime(curTime)
                 .build();
         return save(articleDetail);
@@ -146,7 +146,7 @@ public class ArticleDetailServiceImpl extends ServiceImpl<ArticleDetailMapper, A
             ArticleListDo articleListDo = ArticleListDo.builder()
                     .articleId(article.getId()).categoryName(categoryMap.get(article.getCategoryId()))
                     .articleTitle(article.getArticleTitle()).articleSummary(article.getArticleSummary())
-                    .articleTagList(Arrays.asList(article.getArticleTags().split(Constants.ARTICLE_TAG_DELIMITER)))
+                    .articleTagList(Arrays.asList(article.getArticleTags().split(Constants.COMMA_DELIMITER)))
                     .isOriginal(article.getIsOriginal()).createTime(article.getCreateTime())
                     .build();
             articleListDoList.add(articleListDo);
@@ -162,7 +162,7 @@ public class ArticleDetailServiceImpl extends ServiceImpl<ArticleDetailMapper, A
                 .articleId(articleDetail.getId()).articleTitle(articleDetail.getArticleTitle())
                 .categoryName(category == null ? Constants.STRING_DATA_DEFAULT : category.getCategoryName())
                 .articleContent(articleDetail.getArticleContent())
-                .articleTagList(Arrays.asList(articleDetail.getArticleTags().split(Constants.ARTICLE_TAG_DELIMITER)))
+                .articleTagList(Arrays.asList(articleDetail.getArticleTags().split(Constants.COMMA_DELIMITER)))
                 .isOriginal(articleDetail.getIsOriginal()).createTime(articleDetail.getCreateTime())
                 .build();
         return ResultUtil.buildResultSuccess(articleDetailDo);

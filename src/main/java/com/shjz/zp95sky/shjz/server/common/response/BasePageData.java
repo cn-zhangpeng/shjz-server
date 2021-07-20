@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * 分页信息
- * @author 华夏紫穹
+ * @author 山海紫穹
  */
 @ApiModel(value = "BasePageResult 分页信息", description = "分页信息")
 @Data

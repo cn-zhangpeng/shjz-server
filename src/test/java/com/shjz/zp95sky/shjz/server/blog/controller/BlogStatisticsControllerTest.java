@@ -11,7 +11,7 @@ import javax.annotation.Resource;
 
 /**
  * 博客统计测试
- * @author 华夏紫穹
+ * @author 山海紫穹
  */
 @MockTestAnnotation
 public class BlogStatisticsControllerTest {

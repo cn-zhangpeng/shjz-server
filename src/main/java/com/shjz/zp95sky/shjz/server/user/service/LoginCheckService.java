@@ -5,7 +5,7 @@ import com.shjz.zp95sky.shjz.server.user.dto.LoginDto;
 
 /**
  * 登录逻辑检测
- * @author 华夏紫穹
+ * @author 山海紫穹
  * @date 2021年03月25日 18:24
  */
 public interface LoginCheckService {

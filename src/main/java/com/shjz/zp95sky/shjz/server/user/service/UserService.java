@@ -1,5 +1,6 @@
 package com.shjz.zp95sky.shjz.server.user.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.shjz.zp95sky.shjz.server.user.domain.UserAllDo;
 import com.shjz.zp95sky.shjz.server.user.domain.UserDo;
 import com.shjz.zp95sky.shjz.server.user.dto.ResetPasswordDto;
@@ -8,9 +9,9 @@ import com.shjz.zp95sky.shjz.server.user.entity.User;
 
 /**
  * 用户业务处理接口
- * @author 华夏紫穹
+ * @author 山海紫穹
  */
-public interface UserService {
+public interface UserService extends IService<User> {
 
     /**
      * 查询用户信息

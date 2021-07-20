@@ -1,7 +1,7 @@
 package com.shjz.zp95sky.shjz.server.user.service.impl;
 
 import com.shjz.zp95sky.shjz.server.common.enums.ResponseCodeEnum;
-import com.shjz.zp95sky.shjz.server.common.utils.EncryptUtil;
+import com.shjz.zp95sky.shjz.server.user.utils.EncryptUtil;
 import com.shjz.zp95sky.shjz.server.user.dto.LoginDto;
 import com.shjz.zp95sky.shjz.server.user.entity.User;
 import com.shjz.zp95sky.shjz.server.user.service.LoginCheckService;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 /**
- * @author 华夏紫穹
+ * @author 山海紫穹
  * @date 2021年03月25日 18:29
  */
 @Service
@@ -23,10 +23,10 @@ public class LoginCheckServiceImpl implements LoginCheckService {
 
     @Override
     public ResponseCodeEnum loginCheck(LoginDto loginDto) {
-        String userName = loginDto.getUserName();
+        String username = loginDto.getUsername();
         String password = loginDto.getPassword();
 
-        if (!StringUtils.hasLength(userName) || !StringUtils.hasLength(password)) {
+        if (!StringUtils.hasLength(username) || !StringUtils.hasLength(password)) {
             return ResponseCodeEnum.ERROR_PARAMS;
         }
 

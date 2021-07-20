@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 /**
- * @author 华夏紫穹
+ * @author 山海紫穹
  */
 @ApiModel(value = "PublishArticleDto 文章信息", description = "文章信息")
 @NoArgsConstructor

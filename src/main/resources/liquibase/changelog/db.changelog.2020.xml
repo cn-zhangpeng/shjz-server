@@ -3,7 +3,7 @@
                    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
 
-    <changeSet id="1590979731" author="华夏紫穹">
+    <changeSet id="202006011048" author="山海紫穹">
         <comment>添加用户表、文章类型表、文章详情表</comment>
 
         <createTable tableName="user" remarks="用户表">

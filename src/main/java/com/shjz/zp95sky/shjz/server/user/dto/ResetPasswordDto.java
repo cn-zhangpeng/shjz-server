@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 
 /**
- * @author 华夏紫穹
+ * @author 山海紫穹
  */
 @ApiModel(value = "ResetPasswordDto 重置密码参数", description = "重置密码参数")
 @Data

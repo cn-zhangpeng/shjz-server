@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @author 华夏紫穹
+ * @author 山海紫穹
  * @date 2021年07月20日 14:44
  */
 @Configuration

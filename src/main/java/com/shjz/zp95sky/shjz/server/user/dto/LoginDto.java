@@ -6,7 +6,7 @@ import lombok.Data;
 
 /**
  * 登录参数
- * @author 华夏紫穹
+ * @author 山海紫穹
  * @date 2021年04月08日 17:12
  */
 @ApiModel(value = "LoginDto 登录参数", description = "登录参数")
@@ -14,7 +14,7 @@ import lombok.Data;
 public class LoginDto {
 
     @ApiModelProperty("用户名")
-    private String userName;
+    private String username;
 
     @ApiModelProperty("密码")
     private String password;

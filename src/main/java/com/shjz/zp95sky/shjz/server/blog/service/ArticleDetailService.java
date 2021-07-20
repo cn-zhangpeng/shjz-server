@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  * 文章业务
- * @author 华夏紫穹
+ * @author 山海紫穹
  */
 public interface ArticleDetailService extends IService<ArticleDetail> {
 

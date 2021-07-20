@@ -5,7 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
- * @author 华夏紫穹
+ * @author 山海紫穹
  */
 @ApiModel(value = "UpdateCategoryDto 文章类型信息", description = "文章类型信息")
 @Data

@@ -5,7 +5,7 @@ import lombok.Getter;
 
 /**
  * 错误码
- * @author 华夏紫穹
+ * @author 山海紫穹
  */
 @Getter
 @AllArgsConstructor

@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * 博客统计业务接口
- * @author 华夏紫穹
+ * @author 山海紫穹
  */
 public interface BlogStatisticsService {
 

@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  *
- * @author 华夏紫穹
+ * @author 山海紫穹
  */
 @ApiModel(value = "ArticleDetailDo 文章详情", description = "文章详情")
 @Data

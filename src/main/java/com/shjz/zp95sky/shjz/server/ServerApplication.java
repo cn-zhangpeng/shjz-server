@@ -5,8 +5,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * 入口
- * @author 华夏紫穹
+ * @author 山海紫穹
+ * @date 2021年06月22日 13:30
  */
 @SpringBootApplication
 @MapperScan("com.shjz.zp95sky.shjz.server.*.mapper")

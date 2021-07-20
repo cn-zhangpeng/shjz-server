@@ -1,7 +1,8 @@
 package com.shjz.zp95sky.shjz.server.user.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.shjz.zp95sky.shjz.server.common.utils.EncryptUtil;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.shjz.zp95sky.shjz.server.user.utils.EncryptUtil;
 import com.shjz.zp95sky.shjz.server.user.domain.UserAllDo;
 import com.shjz.zp95sky.shjz.server.user.domain.UserDo;
 import com.shjz.zp95sky.shjz.server.user.dto.ResetPasswordDto;
@@ -18,11 +19,11 @@ import java.util.List;
 
 /**
  * 用户业务实现
- * @author 华夏紫穹
+ * @author 山海紫穹
  */
 @Service
 @RequiredArgsConstructor(onConstructor = @__({ @Autowired}))
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
     private final UserMapper userMapper;
 

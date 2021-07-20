@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * MybatisPlus 配置 {@link Configuration}
- * @author 华夏紫穹
+ * @author 山海紫穹
  */
 @Configuration
 public class MybatisPlusConfig {

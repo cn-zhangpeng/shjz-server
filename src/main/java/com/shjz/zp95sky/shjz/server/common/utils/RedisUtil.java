@@ -1,14 +1,17 @@
 package com.shjz.zp95sky.shjz.server.common.utils;
 
-import org.redisson.api.*;
+import lombok.extern.slf4j.Slf4j;
+import org.redisson.api.RBucket;
+import org.redisson.api.RLock;
+import org.redisson.api.RedissonClient;
 
 import java.util.concurrent.TimeUnit;
 
 /**
  * redis 工具类
- * @author 华夏紫穹
- * @date 2021年03月25日 11:12
+ * @author zhangpeng
  */
+@Slf4j
 public class RedisUtil {
 
     private final RedissonClient redissonClient;
@@ -57,6 +60,34 @@ public class RedisUtil {
      */
     public long getExpire(String key) {
         return getBucket(key).remainTimeToLive();
+    }
+
+    /**
+     * 加锁
+     * @param key 加锁key
+     * @return 加锁成功，返回true，否则返回false
+     */
+    public boolean lock(String key) {
+        RLock lock = redissonClient.getLock(key);
+        return lock.tryLock();
+    }
+
+    /**
+     * 加锁
+     * @param key 加锁key
+     * @param waitTime 加锁最大等待时间
+     * @param leaseTime 多长时间之后释放锁
+     * @param timeUnit 时间单位
+     * @return 加锁成功，返回true，否则返回false
+     */
+    public boolean lock(String key, Integer waitTime, Integer leaseTime, TimeUnit timeUnit) {
+        RLock lock = redissonClient.getLock(key);
+        try {
+            return lock.tryLock(3, 10, TimeUnit.SECONDS);
+        } catch (InterruptedException e) {
+            log.error("redisson lock error", e);
+            return false;
+        }
     }
 
     /**

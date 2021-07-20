@@ -5,7 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
- * @author 华夏紫穹
+ * @author 山海紫穹
  * @date 2021年07月15日 17:42
  */
 @ApiModel(value = "ChangeOriginalDto 修改文章原创标识", description = "修改文章原创标识参数")

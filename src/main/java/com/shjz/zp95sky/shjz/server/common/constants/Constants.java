@@ -2,14 +2,14 @@ package com.shjz.zp95sky.shjz.server.common.constants;
 
 /**
  * 分隔符常量
- * @author 华夏紫穹
+ * @author 山海紫穹
  */
 public class Constants {
 
     /**
      * 分隔符
      */
-    public static final String ARTICLE_TAG_DELIMITER = ",";
+    public static final String COMMA_DELIMITER = ",";
 
     /**
      * 常量

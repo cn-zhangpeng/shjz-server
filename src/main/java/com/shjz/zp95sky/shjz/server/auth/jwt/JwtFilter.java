@@ -1,4 +1,4 @@
-package com.shjz.zp95sky.shjz.server.common.jwt;
+package com.shjz.zp95sky.shjz.server.auth.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shjz.zp95sky.shjz.server.common.constants.Constants;
@@ -8,14 +8,13 @@ import com.shjz.zp95sky.shjz.server.common.response.BaseResult;
 import com.shjz.zp95sky.shjz.server.common.response.ResultUtil;
 import com.shjz.zp95sky.shjz.server.common.utils.RedisUtil;
 import com.shjz.zp95sky.shjz.server.user.entity.User;
-import com.shjz.zp95sky.shjz.server.user.service.TokenService;
 import com.shjz.zp95sky.shjz.server.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
-import org.springframework.util.StringUtils;
+import org.springframework.util.ObjectUtils;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -49,7 +48,6 @@ public class JwtFilter implements Filter {
     private final RedisUtil redisUtil;
     private final ObjectMapper objectMapper;
     private final UserService userService;
-    private final TokenService tokenService;
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -70,15 +68,13 @@ public class JwtFilter implements Filter {
         }
 
         // token 格式校验
-        String jwtStr = httpServletRequest.getHeader(Constants.JWT_HEADER_NAME);
-        int jwtTokenPreLength = Constants.JWT_TOKEN_PRE.length();
-        if (StringUtils.hasLength(jwtStr) || !jwtStr.startsWith(Constants.JWT_TOKEN_PRE) || jwtStr.length() <= jwtTokenPreLength) {
+        String token = httpServletRequest.getHeader(Constants.JWT_HEADER_NAME);
+        if (ObjectUtils.isEmpty(token)) {
             authFailed(httpServletResponse);
             return;
         }
 
         // 登录校验
-        String token = tokenService.getTokenByHeaderStr(jwtStr);
         if (!isAuthSuccess(token)) {
             authFailed(httpServletResponse);
             return;
@@ -120,17 +116,6 @@ public class JwtFilter implements Filter {
         } catch (IOException e) {
             log.error("response error", e);
         }
-    }
-
-
-    @Override
-    public void init(FilterConfig filterConfig) {
-
-    }
-
-    @Override
-    public void destroy() {
-
     }
 
 }

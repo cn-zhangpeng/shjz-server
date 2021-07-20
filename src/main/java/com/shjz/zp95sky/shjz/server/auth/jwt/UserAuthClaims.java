@@ -1,4 +1,4 @@
-package com.shjz.zp95sky.shjz.server.common.jwt;
+package com.shjz.zp95sky.shjz.server.auth.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.RequiredTypeException;
@@ -10,17 +10,17 @@ import java.util.Date;
 
 /**
  * 用户认证签名
- * @author 华夏紫穹
+ * @author 山海紫穹
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class UserAuthClaims extends JwtMap implements Claims {
 
 	public static final String USER_ID_KEY = "userId";
-	public static final String USER_NAME_KEY = "userName";
+	public static final String USER_NAME_KEY = "username";
 
 	private String userId;
-	private String userName;
+	private String username;
 
 	@Override
 	public String getIssuer() {

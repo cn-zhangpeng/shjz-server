@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * 文章类型 Service 测试
- * @author 华夏紫穹
+ * @author 山海紫穹
  */
 @CommonTestAnnotation
 public class ArticleCategoryServiceTest {

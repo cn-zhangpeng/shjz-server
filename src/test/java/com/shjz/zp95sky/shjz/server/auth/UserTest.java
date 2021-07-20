@@ -1,7 +1,7 @@
 package com.shjz.zp95sky.shjz.server.auth;
 
 import com.shjz.zp95sky.shjz.server.annotation.CommonTestAnnotation;
-import com.shjz.zp95sky.shjz.server.common.utils.EncryptUtil;
+import com.shjz.zp95sky.shjz.server.user.utils.EncryptUtil;
 import com.shjz.zp95sky.shjz.server.user.entity.User;
 import com.shjz.zp95sky.shjz.server.user.mapper.UserMapper;
 import com.shjz.zp95sky.shjz.server.user.service.UserService;

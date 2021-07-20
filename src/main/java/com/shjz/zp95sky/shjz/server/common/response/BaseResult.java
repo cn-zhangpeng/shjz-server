@@ -7,7 +7,7 @@ import lombok.Data;
 
 /**
  * 通用返回
- * @author 华夏紫穹
+ * @author 山海紫穹
  */
 @ApiModel(value = "BaseResult<T> 通用返回格式", description = "通用返回格式")
 @JsonInclude(JsonInclude.Include.NON_NULL)

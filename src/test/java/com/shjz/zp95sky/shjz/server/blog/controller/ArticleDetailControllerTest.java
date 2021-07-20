@@ -15,7 +15,7 @@ import java.util.Arrays;
 
 /**
  * 文章详情测试
- * @author 华夏紫穹
+ * @author 山海紫穹
  */
 @MockTestAnnotation
 public class ArticleDetailControllerTest {

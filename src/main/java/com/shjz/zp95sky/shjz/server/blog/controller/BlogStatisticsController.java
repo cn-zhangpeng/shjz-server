@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * @author 华夏紫穹
+ * @author 山海紫穹
  */
 @Api(value = "博客统计", tags = "博客统计接口")
 @RestController

@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * @author 华夏紫穹
+ * @author 山海紫穹
  */
 @ApiModel(value = "ArticleListDo 文章简要信息", description = "文章简要信息")
 @Data

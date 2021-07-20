@@ -4,7 +4,6 @@ import com.shjz.zp95sky.shjz.server.annotation.CommonTestAnnotation;
 import com.shjz.zp95sky.shjz.server.blog.domain.ArticleDetailDo;
 import com.shjz.zp95sky.shjz.server.blog.domain.ArticleListDo;
 import com.shjz.zp95sky.shjz.server.common.entity.CustomPage;
-import com.shjz.zp95sky.shjz.server.common.response.BasePageData;
 import com.shjz.zp95sky.shjz.server.common.response.BaseResult;
 import org.junit.jupiter.api.Test;
 import org.springframework.util.CollectionUtils;
@@ -14,7 +13,7 @@ import java.util.List;
 
 /**
  * 文章详情 Service 测试
- * @author 华夏紫穹
+ * @author 山海紫穹
  */
 @CommonTestAnnotation
 public class ArticleDetailServiceTest {
@@ -24,7 +23,7 @@ public class ArticleDetailServiceTest {
 
     @Test
     public void testGetArticleList() {
-        CustomPage customPage = CustomPage.builder().page(1).size(10).build();
+        CustomPage customPage = CustomPage.builder().page(1).pageSize(10).build();
         BaseResult<List<ArticleListDo>> result = articleDetailService.getArticleList(customPage);
 
         printArticleListInfo(result);
@@ -32,7 +31,7 @@ public class ArticleDetailServiceTest {
 
     @Test
     public void testGetArticleListByCategory() {
-        CustomPage customPage = CustomPage.builder().page(1).size(10).build();
+        CustomPage customPage = CustomPage.builder().page(1).pageSize(10).build();
         BaseResult<List<ArticleListDo>> result = articleDetailService.getArticleListByCategory(1558686897201L, customPage);
 
         printArticleListInfo(result);

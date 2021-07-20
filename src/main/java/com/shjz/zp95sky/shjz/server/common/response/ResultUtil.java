@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * 返回工具类
- * @author 华夏紫穹
+ * @author 山海紫穹
  */
 public class ResultUtil {
 

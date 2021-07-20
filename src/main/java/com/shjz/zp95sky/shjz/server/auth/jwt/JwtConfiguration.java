@@ -1,4 +1,4 @@
-package com.shjz.zp95sky.shjz.server.common.jwt;
+package com.shjz.zp95sky.shjz.server.auth.jwt;
 
 
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -11,7 +11,7 @@ import java.nio.charset.StandardCharsets;
 
 /**
  * jwt 配置
- * @author 华夏紫穹
+ * @author 山海紫穹
  */
 @Data
 @Component

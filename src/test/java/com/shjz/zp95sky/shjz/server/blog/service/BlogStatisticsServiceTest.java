@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * 博客统计 Service 测试
- * @author 华夏紫穹
+ * @author 山海紫穹
  */
 @CommonTestAnnotation
 public class BlogStatisticsServiceTest {

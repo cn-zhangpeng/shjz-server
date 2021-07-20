@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet id="202105231411" author="山海散客">
+        <comment>添加软件表及时间使用表</comment>
+
+        <createTable tableName="software" remarks="软件表">
+            <column name="id" type="bigint" remarks="ID">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="software_name" type="varchar(64)" defaultValue="" remarks="软件名称">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="software_use_time" remarks="软件使用时间记录表">
+            <column name="id" type="bigint" remarks="ID">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="software_id" type="bigint" remarks="软件ID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="device_type" type="varchar(16)" defaultValue="" remarks="设备类型，pc：电脑端，mobile：移动端">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cur_date" type="date" remarks="日期">
+                <constraints nullable="false"/>
+            </column>
+            <column name="use_time_length" type="int" defaultValue="0" remarks="软件使用时长，单位：分钟">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

@@ -3,6 +3,7 @@ package com.shjz.zp95sky.shjz.server.user.service;
 import com.shjz.zp95sky.shjz.server.common.response.BaseResult;
 import com.shjz.zp95sky.shjz.server.user.domain.LoginDo;
 import com.shjz.zp95sky.shjz.server.user.dto.LoginDto;
+import com.shjz.zp95sky.shjz.server.user.entity.User;
 
 /**
  *
@@ -25,5 +26,11 @@ public interface LoginService {
      * @return 用户信息
      */
     BaseResult<Void> logout();
+
+    /**
+     * 获取当前登录用户
+     * @return 当前登录用户信息
+     */
+    User getLoginUser();
 
 }

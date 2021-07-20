@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 登录控制器
- * @author 华夏紫穹
+ * @author 山海紫穹
  * @date 2021年04月08日 17:09
  */
 @Api(value = "登录", tags = "登录接口")
@@ -39,6 +39,13 @@ public class LoginController {
             return ResultUtil.buildResultError(error);
         }
         return loginService.login(loginDto);
+    }
+
+    @ApiOperation("退出登录")
+    @PostMapping("/logout")
+    public BaseResult<Void> logout() {
+
+        return ResultUtil.buildResultSuccess();
     }
 
 }

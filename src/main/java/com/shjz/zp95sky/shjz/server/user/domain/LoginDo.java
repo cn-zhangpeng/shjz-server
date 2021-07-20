@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * 登录响应结果
- * @author 华夏紫穹
+ * @author 山海紫穹
  * @date 2021年04月08日 17:24
  */
 @Data
@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 public class LoginDo {
 
     @ApiModelProperty("姓名")
-    private String userName;
+    private String username;
 
     @ApiModelProperty("token")
     private String accessToken;

@@ -3,13 +3,13 @@
                    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
 
-    <changeSet id="1590979742" author="华夏紫穹">
+    <changeSet id="1590979742" author="山海紫穹">
         <comment>初始化数据</comment>
         <insert tableName="user">
             <column name="id" value="1" />
             <column name="username" value="peng.zhang" />
             <column name="password" value="e10adc3949ba59abbe56e057f20f883e" />
-            <column name="nickname" value="华夏☆紫穹" />
+            <column name="nickname" value="山海☆紫穹" />
             <column name="sex" value="1" />
             <column name="birthday" value="1995-05-09" />
             <column name="avatar" value="https://oscimg.oschina.net/oscnet/up-4e4497d225dafa9591118c847760fa14.jpeg!/both/200x200?t=1517472252000" />
