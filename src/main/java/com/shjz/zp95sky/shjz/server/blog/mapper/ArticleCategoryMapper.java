@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
  * @author 华夏紫穹
  */
 @Repository
-public interface CategoryMapper extends BaseMapper<ArticleCategory> {
+public interface ArticleCategoryMapper extends BaseMapper<ArticleCategory> {
 
 }

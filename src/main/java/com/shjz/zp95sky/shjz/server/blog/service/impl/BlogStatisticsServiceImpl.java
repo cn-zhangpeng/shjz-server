@@ -3,7 +3,7 @@ package com.shjz.zp95sky.shjz.server.blog.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.shjz.zp95sky.shjz.server.blog.domain.ArticleStatisticsCountDayDo;
 import com.shjz.zp95sky.shjz.server.blog.entity.ArticleDetail;
-import com.shjz.zp95sky.shjz.server.blog.mapper.ArticleDetailMapper;
+import com.shjz.zp95sky.shjz.server.blog.service.ArticleDetailService;
 import com.shjz.zp95sky.shjz.server.blog.service.BlogStatisticsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,21 +23,21 @@ import java.util.Map;
 @RequiredArgsConstructor(onConstructor = @__({ @Autowired}))
 public class BlogStatisticsServiceImpl implements BlogStatisticsService {
 
-    private final ArticleDetailMapper articleDetailMapper;
+    private final ArticleDetailService detailService;
 
     @Override
     public List<ArticleStatisticsCountDayDo> getArticleStatisticsCountDay() {
         List<ArticleDetail> articleDetailList = getArticleIdAndCreateTime();
-        return addUpArticleListDay(articleDetailList);
+        return constructArticleStatisticsCountDayDo(articleDetailList);
     }
 
     private List<ArticleDetail> getArticleIdAndCreateTime() {
         LambdaQueryWrapper<ArticleDetail> searchParams = new LambdaQueryWrapper<>();
         searchParams.select(ArticleDetail::getId, ArticleDetail::getCreateTime);
-        return articleDetailMapper.selectList(searchParams);
+        return detailService.list(searchParams);
     }
 
-    private List<ArticleStatisticsCountDayDo> addUpArticleListDay(List<ArticleDetail> articleDetailList) {
+    private List<ArticleStatisticsCountDayDo> constructArticleStatisticsCountDayDo(List<ArticleDetail> articleDetailList) {
         Map<LocalDate, Integer> statisticMap = new HashMap<>();
         articleDetailList.forEach(ad -> {
             LocalDate statisticDate = ad.getCreateTime().toLocalDate();

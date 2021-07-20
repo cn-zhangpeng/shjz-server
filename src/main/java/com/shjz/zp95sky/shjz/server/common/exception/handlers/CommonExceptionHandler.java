@@ -1,7 +1,7 @@
 package com.shjz.zp95sky.shjz.server.common.exception.handlers;
 
 import com.shjz.zp95sky.shjz.server.common.response.BaseResult;
-import com.shjz.zp95sky.shjz.server.common.response.ModelResultUtil;
+import com.shjz.zp95sky.shjz.server.common.response.ResultUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -22,7 +22,7 @@ public class CommonExceptionHandler {
     public BaseResult<Void> resolveException(HttpServletRequest request, Exception e) {
         String requestUri = request.getRequestURI();
         log.error(" >>>>>> " + requestUri + " error !", e);
-        return ModelResultUtil.buildGeneralResultError();
+        return ResultUtil.buildGeneralResultError();
     }
 
 }

@@ -20,6 +20,9 @@ public class BaseResult<T> {
     @ApiModelProperty("提示信息")
     private String msg;
 
+    @ApiModelProperty("分页信息")
+    private BasePageData pageData;
+
     @ApiModelProperty("请求响应数据")
     private T data;
 

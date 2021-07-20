@@ -1,12 +1,15 @@
 package com.shjz.zp95sky.shjz.server.blog.service.impl;
 
 import cn.hutool.core.lang.Snowflake;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.shjz.zp95sky.shjz.server.blog.domain.ArticleCategoryListDo;
 import com.shjz.zp95sky.shjz.server.blog.dto.AddCategoryDto;
 import com.shjz.zp95sky.shjz.server.blog.dto.UpdateCategoryDto;
 import com.shjz.zp95sky.shjz.server.blog.entity.ArticleCategory;
-import com.shjz.zp95sky.shjz.server.blog.mapper.CategoryMapper;
+import com.shjz.zp95sky.shjz.server.blog.mapper.ArticleCategoryMapper;
 import com.shjz.zp95sky.shjz.server.blog.service.ArticleCategoryService;
+import com.shjz.zp95sky.shjz.server.common.response.BaseResult;
+import com.shjz.zp95sky.shjz.server.common.response.ResultUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,56 +25,46 @@ import java.util.List;
  */
 @Service
 @RequiredArgsConstructor(onConstructor = @__({ @Autowired}))
-public class ArticleCategoryServiceImpl implements ArticleCategoryService {
+public class ArticleCategoryServiceImpl extends ServiceImpl<ArticleCategoryMapper, ArticleCategory>
+        implements ArticleCategoryService {
 
-    private final CategoryMapper categoryMapper;
     private final Snowflake snowflake;
 
     @Override
-    public List<ArticleCategoryListDo> getCategoryList() {
-        List<ArticleCategory> categoryList = selectAllArticleCategory();
-        return handleCategoryListData(categoryList);
+    public BaseResult<List<ArticleCategoryListDo>> getCategoryList() {
+        List<ArticleCategory> categoryList = list();
+        return buildArticleCategoryListDo(categoryList);
     }
 
     @Override
-    public boolean updateCategory(Long categoryId, UpdateCategoryDto categoryDto) {
+    public BaseResult<Void> updateCategory(Long categoryId, UpdateCategoryDto categoryDto) {
         ArticleCategory category = ArticleCategory.builder()
                 .id(categoryId).categoryName(categoryDto.getCategoryName())
                 .createTime(LocalDateTime.now())
                 .build();
-        return updateCategoryById(category) == 1;
+        return updateById(category) ? ResultUtil.buildResultSuccess() : ResultUtil.buildGeneralResultError();
     }
 
     @Override
-    public boolean deleteCategory(Long categoryId) {
-        return deleteCategoryById(categoryId) == 1;
+    public BaseResult<Void> deleteCategory(Long categoryId) {
+        return removeById(categoryId) ? ResultUtil.buildResultSuccess() : ResultUtil.buildGeneralResultError();
     }
 
     @Override
-    public boolean addCategory(AddCategoryDto categoryDto) {
+    public BaseResult<Void> addCategory(AddCategoryDto categoryDto) {
         ArticleCategory category = ArticleCategory.builder()
                 .id(snowflake.nextId()).categoryName(categoryDto.getCategoryName())
                 .createTime(LocalDateTime.now())
                 .build();
-        return insertCategory(category) == 1;
+        return save(category) ? ResultUtil.buildResultSuccess() : ResultUtil.buildGeneralResultError();
     }
 
-    private int insertCategory(ArticleCategory category) {
-        return categoryMapper.insert(category);
-    }
-
-    private int deleteCategoryById(Long categoryId) {
-        return categoryMapper.deleteById(categoryId);
-    }
-
-    private int updateCategoryById(ArticleCategory category) {
-        return categoryMapper.updateById(category);
-    }
-
-    private List<ArticleCategoryListDo> handleCategoryListData(List<ArticleCategory> categoryList) {
+    private BaseResult<List<ArticleCategoryListDo>> buildArticleCategoryListDo(List<ArticleCategory> categoryList) {
         List<ArticleCategoryListDo> categoryListDoList = new ArrayList<>();
 
-        if (CollectionUtils.isEmpty(categoryList)) { return categoryListDoList; }
+        if (CollectionUtils.isEmpty(categoryList)) {
+            return ResultUtil.buildResultSuccess(categoryListDoList);
+        }
 
         categoryList.forEach(c -> {
             ArticleCategoryListDo categoryListDo = ArticleCategoryListDo.builder()
@@ -80,11 +73,7 @@ public class ArticleCategoryServiceImpl implements ArticleCategoryService {
             categoryListDoList.add(categoryListDo);
         });
 
-        return categoryListDoList;
-    }
-
-    private List<ArticleCategory> selectAllArticleCategory() {
-        return categoryMapper.selectList(null);
+        return ResultUtil.buildResultSuccess(categoryListDoList);
     }
 
 }

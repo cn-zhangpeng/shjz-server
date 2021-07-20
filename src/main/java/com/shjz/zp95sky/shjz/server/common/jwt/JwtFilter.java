@@ -5,7 +5,7 @@ import com.shjz.zp95sky.shjz.server.common.constants.Constants;
 import com.shjz.zp95sky.shjz.server.common.constants.RedisConstants;
 import com.shjz.zp95sky.shjz.server.common.enums.ResponseCodeEnum;
 import com.shjz.zp95sky.shjz.server.common.response.BaseResult;
-import com.shjz.zp95sky.shjz.server.common.response.ModelResultUtil;
+import com.shjz.zp95sky.shjz.server.common.response.ResultUtil;
 import com.shjz.zp95sky.shjz.server.common.utils.RedisUtil;
 import com.shjz.zp95sky.shjz.server.user.entity.User;
 import com.shjz.zp95sky.shjz.server.user.service.TokenService;
@@ -15,7 +15,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.*;
@@ -34,7 +33,7 @@ import java.util.List;
  * @date 2021年03月26日 3:00
  */
 @WebFilter(urlPatterns = "/*")
-@Component
+//@Component
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__({ @Autowired}))
 public class JwtFilter implements Filter {
@@ -112,7 +111,7 @@ public class JwtFilter implements Filter {
     }
 
     private void authFailed(HttpServletResponse response) {
-        BaseResult<Void> res = ModelResultUtil.buildResultError(ResponseCodeEnum.ERROR_AUTH_INVALID);
+        BaseResult<Void> res = ResultUtil.buildResultError(ResponseCodeEnum.ERROR_AUTH_INVALID);
         response.setCharacterEncoding(StandardCharsets.UTF_8.name());
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         try (PrintWriter writer = response.getWriter()) {

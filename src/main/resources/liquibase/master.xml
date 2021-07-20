@@ -4,8 +4,6 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
-    <property name="now" value="now()" dbms="mysql" />
-    
     <include file="liquibase/changelog/db.changelog.table-1.xml" relativeToChangelogFile="false" />
     <include file="liquibase/changelog/init-data.xml" relativeToChangelogFile="false" />
 

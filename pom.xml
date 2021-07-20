@@ -2,12 +2,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.4.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+
 	<groupId>com.shjz.zp95sky</groupId>
 	<artifactId>shjz-server</artifactId>
 	<version>1.0</version>
@@ -21,6 +23,8 @@
 		<jjwt.version>0.9.1</jjwt.version>
 		<redisson-starter.version>3.15.5</redisson-starter.version>
 		<hutool.version>5.6.5</hutool.version>
+		<liquibase.version>4.4.1</liquibase.version>
+
 		<skipTests>true</skipTests>
 	</properties>
 
@@ -72,6 +76,7 @@
 		<dependency>
 			<groupId>org.liquibase</groupId>
 			<artifactId>liquibase-core</artifactId>
+			<version>${liquibase.version}</version>
 		</dependency>
 
 		<!-- lombok -->
@@ -112,12 +117,6 @@
 			<groupId>com.github.xiaoymin</groupId>
 			<artifactId>knife4j-spring-boot-starter</artifactId>
 			<version>${knife4j.version}</version>
-		</dependency>
-
-		<!-- elasticsearch -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-elasticsearch</artifactId>
 		</dependency>
 
 		<!-- jjwt -->

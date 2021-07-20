@@ -2,6 +2,7 @@ package com.shjz.zp95sky.shjz.server.blog.service;
 
 import com.shjz.zp95sky.shjz.server.annotation.CommonTestAnnotation;
 import com.shjz.zp95sky.shjz.server.blog.domain.ArticleCategoryListDo;
+import com.shjz.zp95sky.shjz.server.common.response.BaseResult;
 import org.junit.jupiter.api.Test;
 
 import javax.annotation.Resource;
@@ -19,8 +20,8 @@ public class ArticleCategoryServiceTest {
 
     @Test
     public void testGetCategoryList() {
-        List<ArticleCategoryListDo> categoryList = categoryService.getCategoryList();
-        categoryList.forEach(System.out::println);
+        BaseResult<List<ArticleCategoryListDo>> result = categoryService.getCategoryList();
+        result.getData().forEach(System.out::println);
     }
 
 }

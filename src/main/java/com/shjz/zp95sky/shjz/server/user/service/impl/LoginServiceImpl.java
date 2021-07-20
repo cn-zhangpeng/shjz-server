@@ -7,7 +7,7 @@ import com.shjz.zp95sky.shjz.server.common.jwt.JwtConfiguration;
 import com.shjz.zp95sky.shjz.server.common.jwt.JwtTokenProvider;
 import com.shjz.zp95sky.shjz.server.common.jwt.UserAuthClaims;
 import com.shjz.zp95sky.shjz.server.common.response.BaseResult;
-import com.shjz.zp95sky.shjz.server.common.response.ModelResultUtil;
+import com.shjz.zp95sky.shjz.server.common.response.ResultUtil;
 import com.shjz.zp95sky.shjz.server.common.utils.RedisUtil;
 import com.shjz.zp95sky.shjz.server.user.domain.LoginDo;
 import com.shjz.zp95sky.shjz.server.user.dto.LoginDto;
@@ -59,7 +59,7 @@ public class LoginServiceImpl implements LoginService {
                 .userName(user.getUsername())
                 .accessToken(token)
                 .build();
-        return ModelResultUtil.buildResultSuccess(loginDo);
+        return ResultUtil.buildResultSuccess(loginDo);
     }
 
     @Override
@@ -69,7 +69,7 @@ public class LoginServiceImpl implements LoginService {
         // redis 删除 token 信息
         removeAuthTokenFromRedis(token);
 
-        return ModelResultUtil.buildGeneralResultSuccess();
+        return ResultUtil.buildResultSuccess();
     }
 
     private String createToken(User user) {

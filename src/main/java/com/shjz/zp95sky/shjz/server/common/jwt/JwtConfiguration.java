@@ -7,6 +7,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.spec.SecretKeySpec;
+import java.nio.charset.StandardCharsets;
 
 /**
  * jwt 配置
@@ -29,6 +30,6 @@ public class JwtConfiguration {
 
     public SecretKeySpec getSecretKeySpec() {
         return new SecretKeySpec(this.getKey()
-                .getBytes(), SignatureAlgorithm.HS512.getJcaName());
+                .getBytes(StandardCharsets.UTF_8), SignatureAlgorithm.HS512.getJcaName());
     }
 }

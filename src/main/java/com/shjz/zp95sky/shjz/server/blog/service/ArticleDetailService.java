@@ -6,10 +6,11 @@ import com.shjz.zp95sky.shjz.server.blog.domain.ArticleListDo;
 import com.shjz.zp95sky.shjz.server.blog.dto.GetArticleListByKeywordDto;
 import com.shjz.zp95sky.shjz.server.blog.dto.PublishArticleDto;
 import com.shjz.zp95sky.shjz.server.blog.entity.ArticleDetail;
-import com.shjz.zp95sky.shjz.server.blog.entity.ArticleCategory;
 import com.shjz.zp95sky.shjz.server.common.entity.CustomPage;
-import com.shjz.zp95sky.shjz.server.common.response.BasePageResult;
+import com.shjz.zp95sky.shjz.server.common.response.BasePageData;
 import com.shjz.zp95sky.shjz.server.common.response.BaseResult;
+
+import java.util.List;
 
 /**
  * 文章业务
@@ -20,24 +21,24 @@ public interface ArticleDetailService extends IService<ArticleDetail> {
     /**
      * 根据分页信息查询文章列表
      * @param customPage 分页信息
-     * @return {@link ArticleListDo} 文章列表及分页信息
+     * @return 查询结果
      */
-    BasePageResult<ArticleListDo> getArticleList(CustomPage customPage);
+    BaseResult<List<ArticleListDo>> getArticleList(CustomPage customPage);
 
     /**
      * 根据类型查询文章列表
      * @param categoryId 文章类型 ID
      * @param customPage 分页信息
-     * @return {@link ArticleListDo} 文章列表及分页信息
+     * @return 查询结果
      */
-    BasePageResult<ArticleListDo> getArticleListByCategory(Long categoryId, CustomPage customPage);
+    BaseResult<List<ArticleListDo>> getArticleListByCategory(Long categoryId, CustomPage customPage);
 
     /**
      * 根据文章 ID 查询文章详情
      * @param articleId 文章 ID
-     * @return {@link ArticleDetail} {@link ArticleCategory} 文章详情
+     * @return 查询结果
      */
-    ArticleDetailDo getArticleById(Long articleId);
+    BaseResult<ArticleDetailDo> getArticleById(Long articleId);
 
     /**
      * 根据文章 ID 删除文章
@@ -54,11 +55,11 @@ public interface ArticleDetailService extends IService<ArticleDetail> {
     boolean publishArticle(PublishArticleDto articleDto);
 
     /**
-     * 根据关键字查询文章列表（标题和正文）
+     * 根据关键字查询文章列表（标题）
      * @param keywordDto 关键字及分页信息
-     * @return 分页及文章列表
+     * @return 查询结果
      */
-    BasePageResult<ArticleListDo> getArticleListByKeyword(GetArticleListByKeywordDto keywordDto);
+    BaseResult<List<ArticleListDo>> getArticleListByKeyword(GetArticleListByKeywordDto keywordDto);
 
     /**
      * 修改文章是否原创标识

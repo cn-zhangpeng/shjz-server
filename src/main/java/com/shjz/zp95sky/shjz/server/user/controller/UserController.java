@@ -2,7 +2,7 @@ package com.shjz.zp95sky.shjz.server.user.controller;
 
 import com.shjz.zp95sky.shjz.server.common.enums.ResponseCodeEnum;
 import com.shjz.zp95sky.shjz.server.common.response.BaseResult;
-import com.shjz.zp95sky.shjz.server.common.response.ModelResultUtil;
+import com.shjz.zp95sky.shjz.server.common.response.ResultUtil;
 import com.shjz.zp95sky.shjz.server.user.domain.UserAllDo;
 import com.shjz.zp95sky.shjz.server.user.domain.UserDo;
 import com.shjz.zp95sky.shjz.server.user.dto.ResetPasswordDto;
@@ -34,21 +34,21 @@ public class UserController {
     @GetMapping("/info")
     public BaseResult<UserDo> getUserInfo() {
         UserDo userDo = userService.getUserInfo();
-        return ModelResultUtil.buildResultSuccess(userDo);
+        return ResultUtil.buildResultSuccess(userDo);
     }
 
     @ApiOperation("查询用户全部信息")
     @GetMapping("/allInfo")
     public BaseResult<UserAllDo> getUserAllInfo() {
         UserAllDo userDo = userService.getUserAllInfo();
-        return ModelResultUtil.buildResultSuccess(userDo);
+        return ResultUtil.buildResultSuccess(userDo);
     }
 
     @ApiOperation("更新用户信息")
     @PutMapping("/info")
     public BaseResult<Void> updateUserInfo(@RequestBody UserAllDto userDto) {
         boolean result = userService.updateUserInfo(userDto);
-        return result ? ModelResultUtil.buildGeneralResultSuccess() : ModelResultUtil.buildGeneralResultError();
+        return result ? ResultUtil.buildResultSuccess() : ResultUtil.buildGeneralResultError();
     }
 
     @ApiOperation("密码重置")
@@ -58,11 +58,11 @@ public class UserController {
 
         ResponseCodeEnum error = userCheckService.resetPasswordCheck(userId, passwordDto);
         if (error != null) {
-            return ModelResultUtil.buildResultError(error);
+            return ResultUtil.buildResultError(error);
         }
 
         boolean result = userService.resetPassword(userId, passwordDto);
-        return result ? ModelResultUtil.buildGeneralResultSuccess() : ModelResultUtil.buildGeneralResultError();
+        return result ? ResultUtil.buildResultSuccess() : ResultUtil.buildGeneralResultError();
     }
 
 }

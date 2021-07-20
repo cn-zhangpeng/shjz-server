@@ -38,6 +38,10 @@ public class ArticleDetail {
     @TableField("article_summary")
     private String articleSummary;
 
+    /** 文章内容 */
+    @TableField("article_content")
+    private String articleContent;
+
     /** 文章标签（多个 标签之间，以，拆分） */
     @TableField("article_tags")
     private String articleTags;

@@ -3,7 +3,7 @@ package com.shjz.zp95sky.shjz.server.blog.controller;
 import com.shjz.zp95sky.shjz.server.blog.domain.ArticleStatisticsCountDayDo;
 import com.shjz.zp95sky.shjz.server.blog.service.BlogStatisticsService;
 import com.shjz.zp95sky.shjz.server.common.response.BaseResult;
-import com.shjz.zp95sky.shjz.server.common.response.ModelResultUtil;
+import com.shjz.zp95sky.shjz.server.common.response.ResultUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +29,7 @@ public class BlogStatisticsController {
     @GetMapping(value = "/articleCount/day")
     public BaseResult<List<ArticleStatisticsCountDayDo>> getArticleCountDay() {
         List<ArticleStatisticsCountDayDo> countDayDoList = statisticsService.getArticleStatisticsCountDay();
-        return ModelResultUtil.buildResultSuccess(countDayDoList);
+        return ResultUtil.buildResultSuccess(countDayDoList);
     }
 
 }

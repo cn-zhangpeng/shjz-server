@@ -2,7 +2,7 @@ package com.shjz.zp95sky.shjz.server.user.controller;
 
 import com.shjz.zp95sky.shjz.server.common.enums.ResponseCodeEnum;
 import com.shjz.zp95sky.shjz.server.common.response.BaseResult;
-import com.shjz.zp95sky.shjz.server.common.response.ModelResultUtil;
+import com.shjz.zp95sky.shjz.server.common.response.ResultUtil;
 import com.shjz.zp95sky.shjz.server.user.domain.LoginDo;
 import com.shjz.zp95sky.shjz.server.user.dto.LoginDto;
 import com.shjz.zp95sky.shjz.server.user.service.LoginCheckService;
@@ -36,7 +36,7 @@ public class LoginController {
         log.info("start to login...");
         ResponseCodeEnum error = loginCheckService.loginCheck(loginDto);
         if (error != null) {
-            return ModelResultUtil.buildResultError(error);
+            return ResultUtil.buildResultError(error);
         }
         return loginService.login(loginDto);
     }

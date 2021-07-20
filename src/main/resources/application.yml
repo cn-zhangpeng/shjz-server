@@ -78,9 +78,6 @@ spring:
         max-idle: 50
         max-active: 50
     port: 6379
-  elasticsearch:
-    rest:
-      uris: localhost:9200
 
 id-worker:
   worker-id: 1
