@@ -1,5 +1,6 @@
 package com.shjz.zp95sky.shjz.server.blog.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
@@ -16,6 +17,7 @@ import java.time.LocalDate;
 public class ArticleStatisticsCountDayDo {
 
     @ApiModelProperty("统计日期（yyyy-MM-dd）")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate statisticDate;
 
     @ApiModelProperty("文章数量")
