@@ -5,62 +5,13 @@
     <!-- 日志根目录 -->
     <property name="APP_DIR" value="logs"/>
 
-    <!-- ERROR -->
-    <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <!-- log 文件目录 -->
-        <file>${ROOT_PATH}/${APP_DIR}/shjz-server_error.log</file>
-        <!-- 滚动策略：日期，文件大小 -->
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <!-- 根据日期汇总日志文件 -->
-            <fileNamePattern>${ROOT_PATH}/${APP_DIR}/error/shjz-server_error-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
-            <!-- 根据文件大小汇总日志文件，最大大小：10MB，如果文件大小大于 10M，索引从 0 开始-->
-            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>10MB</maxFileSize>
-            </timeBasedFileNamingAndTriggeringPolicy>
-            <!-- 日志文件保留日期 -->
-            <maxHistory>3</maxHistory>
-        </rollingPolicy>
-        <!-- 使用追加模式记录日志 -->
-        <append>true</append>
-        <!-- 格式化内容 -->
-        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level --- [%thread] %logger Line:%-3L - %msg%n</pattern>
-            <charset>utf-8</charset>
-        </encoder>
-        <!-- 日志文件过滤 -->
-        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>error</level>
-        </filter>
-    </appender>
-
-    <!-- WARN -->
-    <appender name="WARN" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${ROOT_PATH}/${APP_DIR}/shjz-server_warn.log</file>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${ROOT_PATH}/${APP_DIR}/warn/shjz-server_warn-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
-            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>10MB</maxFileSize>
-            </timeBasedFileNamingAndTriggeringPolicy>
-            <maxHistory>3</maxHistory>
-        </rollingPolicy>
-        <append>true</append>
-        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level --- [%thread] %logger Line:%-3L - %msg%n</pattern>
-            <charset>utf-8</charset>
-        </encoder>
-        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>warn</level>
-        </filter>
-    </appender>
-
-
     <!-- INFO -->
     <appender name="INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${ROOT_PATH}/${APP_DIR}/shjz-server_info.log</file>
+        <file>${ROOT_PATH}/${APP_DIR}/shjz.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${ROOT_PATH}/${APP_DIR}/info/shjz-server_info-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <fileNamePattern>${ROOT_PATH}/${APP_DIR}/info/shjz-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>10MB</maxFileSize>
+                <maxFileSize>50MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
             <maxHistory>3</maxHistory>
         </rollingPolicy>
@@ -71,27 +22,6 @@
         </encoder>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>info</level>
-        </filter>
-    </appender>
-
-
-    <!-- DEBUG -->
-    <appender name="DEBUG" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${ROOT_PATH}/${APP_DIR}/shjz-server_debug.log</file>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${ROOT_PATH}/${APP_DIR}/debug/shjz-server_debug-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
-            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>10MB</maxFileSize>
-            </timeBasedFileNamingAndTriggeringPolicy>
-            <maxHistory>3</maxHistory>
-        </rollingPolicy>
-        <append>true</append>
-        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level --- [%thread] %logger Line:%-3L - %msg%n</pattern>
-            <charset>utf-8</charset>
-        </encoder>
-        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>debug</level>
         </filter>
     </appender>
 
@@ -122,10 +52,7 @@
 
     <!-- 生产环境设置为 INFO -->
     <root level="STDOUT">
-        <appender-ref ref="ERROR"/>
-        <appender-ref ref="WARN"/>
         <appender-ref ref="INFO"/>
-        <appender-ref ref="DEBUG"/>
         <!-- 生产环境删除 STDOUT appender -->
         <appender-ref ref="STDOUT"/>
     </root>

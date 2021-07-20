@@ -16,8 +16,8 @@ import java.util.Date;
 @Data
 public class UserAuthClaims extends JwtMap implements Claims {
 
-	public static final String MOBILE_KEY = "userId";
-	public static final String ROLE_ID_KEY = "userName";
+	public static final String USER_ID_KEY = "userId";
+	public static final String USER_NAME_KEY = "userName";
 
 	private String userId;
 	private String userName;
