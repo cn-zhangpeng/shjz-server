@@ -29,8 +29,7 @@ public class SoftwareController {
     @ApiOperation("查询软件列表")
     @GetMapping("/list")
     public BaseResult<List<SoftwareListDo>> list() {
-        List<SoftwareListDo> softwareList = softwareService.getSoftwareList();
-        return ResultUtil.buildResultSuccess(softwareList);
+        return softwareService.getSoftwareList();
     }
 
 }

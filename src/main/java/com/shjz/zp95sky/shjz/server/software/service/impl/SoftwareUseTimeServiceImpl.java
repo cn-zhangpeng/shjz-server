@@ -3,14 +3,19 @@ package com.shjz.zp95sky.shjz.server.software.service.impl;
 import cn.hutool.core.lang.Snowflake;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.shjz.zp95sky.shjz.server.common.response.BaseResult;
+import com.shjz.zp95sky.shjz.server.common.response.ResultUtil;
+import com.shjz.zp95sky.shjz.server.common.utils.LocalDateUtil;
 import com.shjz.zp95sky.shjz.server.software.domain.WeekStatisticDo;
 import com.shjz.zp95sky.shjz.server.software.domain.WeekStatisticUseTimeDo;
 import com.shjz.zp95sky.shjz.server.software.domain.YearDateStatisticDo;
+import com.shjz.zp95sky.shjz.server.software.domain.YearStatisticDo;
 import com.shjz.zp95sky.shjz.server.software.dto.BatchReportSoftwareUseTimeDetailDto;
 import com.shjz.zp95sky.shjz.server.software.dto.BatchReportSoftwareUseTimeDto;
 import com.shjz.zp95sky.shjz.server.software.dto.ReportSoftwareUseTimeDto;
 import com.shjz.zp95sky.shjz.server.software.entity.Software;
 import com.shjz.zp95sky.shjz.server.software.entity.SoftwareUseTime;
+import com.shjz.zp95sky.shjz.server.software.entity.SoftwareUseTimeStatistic;
 import com.shjz.zp95sky.shjz.server.software.enums.SoftwareDeviceTypeEnum;
 import com.shjz.zp95sky.shjz.server.software.mapper.SoftwareUseTimeMapper;
 import com.shjz.zp95sky.shjz.server.software.service.SoftwareService;
@@ -19,13 +24,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -47,24 +50,25 @@ public class SoftwareUseTimeServiceImpl extends ServiceImpl<SoftwareUseTimeMappe
     @Override
     public void reportSoftwareUseTime(ReportSoftwareUseTimeDto useTimeDto) {
         SoftwareDeviceTypeEnum deviceTypeEnum = SoftwareDeviceTypeEnum.getByKey(useTimeDto.getDeviceType());
-        SoftwareUseTime softwareUseTime = constructSoftwareUseTime(useTimeDto.getSoftwareId(),
+        SoftwareUseTime softwareUseTime = buildSoftwareUseTime(useTimeDto.getSoftwareId(),
                 deviceTypeEnum, useTimeDto.getUseTime());
         save(softwareUseTime);
     }
 
     @Override
-    public void batchReportSoftwareUseTime(BatchReportSoftwareUseTimeDto userTimeDto) {
+    public BaseResult<Void> batchReportSoftwareUseTime(BatchReportSoftwareUseTimeDto userTimeDto) {
         List<BatchReportSoftwareUseTimeDetailDto> useTimeDtoList = userTimeDto.getUseTimeDetailDtoList();
         List<SoftwareUseTime> softwareUseTimeList = new ArrayList<>(useTimeDtoList.size());
         for (BatchReportSoftwareUseTimeDetailDto utDto : useTimeDtoList) {
             SoftwareDeviceTypeEnum dtEnum = SoftwareDeviceTypeEnum.getByKey(userTimeDto.getDeviceType());
-            softwareUseTimeList.add(constructSoftwareUseTime(utDto.getSoftwareId(), dtEnum, utDto.getUseTime()));
+            softwareUseTimeList.add(buildSoftwareUseTime(utDto.getSoftwareId(), dtEnum, utDto.getUseTime()));
         }
         saveBatch(softwareUseTimeList);
+        return ResultUtil.buildResultSuccess();
     }
 
     @Override
-    public WeekStatisticDo weekStatistic() {
+    public BaseResult<WeekStatisticDo> weekStatistic() {
         // 查询的开始和结束日期
         LocalDate endDate = LocalDate.now();
         LocalDate startDate = endDate.plusDays(-6L);
@@ -88,19 +92,87 @@ public class SoftwareUseTimeServiceImpl extends ServiceImpl<SoftwareUseTimeMappe
                 .collect(Collectors.toMap(Software::getId, Software::getSoftwareName));
 
         // 组装返回结果
-        return constructWeekStatisticDo(topIds, dateTotalMap, softwareMap, startDate, endDate);
+        WeekStatisticDo weekStatisticDo = buildWeekStatisticDo(topIds, dateTotalMap, softwareMap, startDate, endDate);
+        return ResultUtil.buildResultSuccess(weekStatisticDo);
     }
 
     @Override
-    public List<YearDateStatisticDo> yearDateStatistic() {
+    public BaseResult<List<YearStatisticDo>> yearStatistic() {
+        LocalDate startDate = LocalDateUtil.getFirstDayOfCurrentYear();
+        LocalDate endDate = LocalDateUtil.getLastDayOfCurrentYear();
+
+        // 使用时间统计
+        List<SoftwareUseTimeStatistic> statisticData = useTimeMapper.selectYearStatistic(startDate, endDate);
+
+        // 按照使用时长从长到短排序
+        statisticData = statisticData.stream()
+                .sorted(Comparator.comparingInt(SoftwareUseTimeStatistic::getUseTimeLength)
+                        .reversed())
+                .collect(Collectors.toList());
+
+        // 查询所有的软件列表
+        List<Software> softwareList = softwareService.list();
+
+        List<YearStatisticDo> result = buildYearStatisticDo(statisticData, softwareList, 5);
+        return ResultUtil.buildResultSuccess(result);
+    }
+
+    @Override
+    public BaseResult<List<YearDateStatisticDo>> yearDateStatistic() {
         int curYear = LocalDate.now().getYear();
 
         // 查询指定年份的每一天的软件使用时长
-        return useTimeMapper.selectYearDateStatistic(curYear);
+        List<YearDateStatisticDo> result = useTimeMapper.selectYearDateStatistic(curYear);
+        return ResultUtil.buildResultSuccess(result);
     }
 
-    private WeekStatisticDo constructWeekStatisticDo(List<Long> topIds, Map<String, Integer> dateTotalMap,
-                                                     Map<Long, String> softwareMap, LocalDate startDate, LocalDate endDate) {
+    /**
+     * 构建年统计返回结果
+     * @param statisticData 统计数据
+     * @param softwareList 软件字典
+     * @param num 统计具体的个数，假如为5，返回6个元素，那表示前5具体到名称，其他的直接归为其他
+     * @return 统计结果
+     */
+    private List<YearStatisticDo> buildYearStatisticDo(List<SoftwareUseTimeStatistic> statisticData,
+                                                       List<Software> softwareList, int num) {
+        List<YearStatisticDo> result = new ArrayList<>();
+        if (CollectionUtils.isEmpty(statisticData)) { return result; }
+
+        // 假如总数不够num个，直接使用总数，假如超过num个，使用num
+        int dataLength = statisticData.size();
+        num = Math.min(dataLength, num);
+
+        Map<Long, String> softwareMap = softwareList.stream().collect(Collectors.toMap(Software::getId, Software::getSoftwareName));
+
+        int othersUseTimeLength = 0;
+        for (int i = 0; i < dataLength; i ++) {
+            SoftwareUseTimeStatistic data = statisticData.get(i);
+
+            // 软件字典中没找到对应的软件，不进行统计
+            String softwareName = softwareMap.get(data.getSoftwareId());
+            if (ObjectUtils.isEmpty(softwareName)) { continue; }
+
+            // 假如超过指定个数，直接汇总时间到其他分类中
+            if (i >= num) {
+                othersUseTimeLength += data.getUseTimeLength();
+                continue;
+            }
+
+            result.add(
+                    YearStatisticDo.builder().softwareName(softwareName)
+                            .useTimeLength(data.getUseTimeLength()).build()
+            );
+        }
+
+        // 添加其他的使用时长
+        result.add(YearStatisticDo.builder().softwareName("其他")
+                .useTimeLength(othersUseTimeLength).build());
+
+        return result;
+    }
+
+    private WeekStatisticDo buildWeekStatisticDo(List<Long> topIds, Map<String, Integer> dateTotalMap,
+                                                 Map<Long, String> softwareMap, LocalDate startDate, LocalDate endDate) {
         // 组装日期
         List<LocalDate> dateList = new ArrayList<>();
         for (LocalDate cur = startDate; cur.isBefore(endDate.plusDays(1)); cur = cur.plusDays(1)) {
@@ -181,8 +253,8 @@ public class SoftwareUseTimeServiceImpl extends ServiceImpl<SoftwareUseTimeMappe
         return list(queryWrapper);
     }
 
-    private SoftwareUseTime constructSoftwareUseTime(Long softwareId, SoftwareDeviceTypeEnum deviceTypeEnum,
-                                                     Integer useTime) {
+    private SoftwareUseTime buildSoftwareUseTime(Long softwareId, SoftwareDeviceTypeEnum deviceTypeEnum,
+                                                 Integer useTime) {
         String deviceType = ObjectUtils.isEmpty(deviceTypeEnum) ? "" : deviceTypeEnum.getKey();
         return SoftwareUseTime.builder()
                 .id(snowflake.nextId()).softwareId(softwareId).deviceType(deviceType)

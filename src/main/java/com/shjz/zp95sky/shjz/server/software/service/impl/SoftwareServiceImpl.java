@@ -2,6 +2,8 @@ package com.shjz.zp95sky.shjz.server.software.service.impl;
 
 import cn.hutool.core.lang.Snowflake;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.shjz.zp95sky.shjz.server.common.response.BaseResult;
+import com.shjz.zp95sky.shjz.server.common.response.ResultUtil;
 import com.shjz.zp95sky.shjz.server.software.domain.SoftwareListDo;
 import com.shjz.zp95sky.shjz.server.software.dto.AddSoftwareDto;
 import com.shjz.zp95sky.shjz.server.software.entity.Software;
@@ -27,7 +29,7 @@ public class SoftwareServiceImpl extends ServiceImpl<SoftwareMapper, Software> i
 
     @Override
     public void addSoftware(AddSoftwareDto softwareDto) {
-        Software software = constructSoftware(softwareDto.getSoftwareName());
+        Software software = buildSoftware(softwareDto.getSoftwareName());
         save(software);
     }
 
@@ -35,28 +37,30 @@ public class SoftwareServiceImpl extends ServiceImpl<SoftwareMapper, Software> i
     public void batchAddSoftware(List<AddSoftwareDto> softwareDtoList) {
         List<Software> softwareList = new ArrayList<>(softwareDtoList.size());
         for (AddSoftwareDto softwareDto : softwareDtoList) {
-            softwareList.add(constructSoftware(softwareDto.getSoftwareName()));
+            softwareList.add(buildSoftware(softwareDto.getSoftwareName()));
         }
         saveBatch(softwareList);
     }
 
     @Override
-    public List<SoftwareListDo> getSoftwareList() {
+    public BaseResult<List<SoftwareListDo>> getSoftwareList() {
         List<Software> softwareList = list();
-        List<SoftwareListDo> softwareListDos = new ArrayList<>(softwareList.size());
+        List<SoftwareListDo> result = new ArrayList<>(softwareList.size());
+        if (CollectionUtils.isEmpty(softwareList)) {
+            return ResultUtil.buildResultSuccess(result);
+        }
 
-        if (CollectionUtils.isEmpty(softwareList)) { return softwareListDos; }
-        softwareList.forEach(s -> softwareListDos.add(constructSoftwareListDo(s)));
-        return softwareListDos;
+        softwareList.forEach(s -> result.add(buildSoftwareListDo(s)));
+        return ResultUtil.buildResultSuccess(result);
     }
 
-    private SoftwareListDo constructSoftwareListDo(Software software) {
+    private SoftwareListDo buildSoftwareListDo(Software software) {
         return SoftwareListDo.builder()
                 .id(software.getId()).softwareName(software.getSoftwareName())
                 .build();
     }
 
-    private Software constructSoftware(String softwareName) {
+    private Software buildSoftware(String softwareName) {
         return Software.builder()
                 .id(snowflake.nextId()).softwareName(softwareName)
                 .build();

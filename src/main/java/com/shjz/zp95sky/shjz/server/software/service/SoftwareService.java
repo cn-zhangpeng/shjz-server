@@ -1,6 +1,7 @@
 package com.shjz.zp95sky.shjz.server.software.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.shjz.zp95sky.shjz.server.common.response.BaseResult;
 import com.shjz.zp95sky.shjz.server.software.domain.SoftwareListDo;
 import com.shjz.zp95sky.shjz.server.software.dto.AddSoftwareDto;
 import com.shjz.zp95sky.shjz.server.software.entity.Software;
@@ -30,6 +31,6 @@ public interface SoftwareService extends IService<Software> {
      * 查询软件列表
      * @return 软件列表
      */
-    List<SoftwareListDo> getSoftwareList();
+    BaseResult<List<SoftwareListDo>> getSoftwareList();
 
 }

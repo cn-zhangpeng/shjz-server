@@ -1,7 +1,9 @@
 package com.shjz.zp95sky.shjz.server.software.mapper;
 
 import com.shjz.zp95sky.shjz.server.annotation.CommonTestAnnotation;
+import com.shjz.zp95sky.shjz.server.common.utils.LocalDateUtil;
 import com.shjz.zp95sky.shjz.server.software.domain.YearDateStatisticDo;
+import com.shjz.zp95sky.shjz.server.software.entity.SoftwareUseTimeStatistic;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
@@ -27,6 +29,17 @@ public class SoftwareUseTimeMapperTest {
         List<YearDateStatisticDo> statisticDoList = useTimeMapper.selectYearDateStatistic(curYear);
         for (YearDateStatisticDo s : statisticDoList) {
             log.info("date: {}, software use time: {}", s.getCurDate(), s.getUseTimeLength());
+        }
+    }
+
+    @Test
+    public void testSelectYearStatistic() {
+        LocalDate startDate = LocalDateUtil.getFirstDayOfCurrentYear();
+        LocalDate endDate = LocalDateUtil.getLastDayOfCurrentYear();
+
+        List<SoftwareUseTimeStatistic> statisticData = useTimeMapper.selectYearStatistic(startDate, endDate);
+        for (SoftwareUseTimeStatistic s : statisticData) {
+            log.info("software id: {}, use time length: {}", s.getSoftwareId(), s.getUseTimeLength());
         }
     }
 

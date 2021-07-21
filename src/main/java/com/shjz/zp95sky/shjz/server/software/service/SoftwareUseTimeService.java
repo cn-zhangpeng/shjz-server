@@ -1,8 +1,10 @@
 package com.shjz.zp95sky.shjz.server.software.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.shjz.zp95sky.shjz.server.common.response.BaseResult;
 import com.shjz.zp95sky.shjz.server.software.domain.WeekStatisticDo;
 import com.shjz.zp95sky.shjz.server.software.domain.YearDateStatisticDo;
+import com.shjz.zp95sky.shjz.server.software.domain.YearStatisticDo;
 import com.shjz.zp95sky.shjz.server.software.dto.BatchReportSoftwareUseTimeDto;
 import com.shjz.zp95sky.shjz.server.software.dto.ReportSoftwareUseTimeDto;
 import com.shjz.zp95sky.shjz.server.software.entity.SoftwareUseTime;
@@ -25,19 +27,26 @@ public interface SoftwareUseTimeService extends IService<SoftwareUseTime> {
     /**
      * 批量上报软件使用时长
      * @param useTimeDto 软件使用时长信息
+     * @return 上报结果
      */
-    void batchReportSoftwareUseTime(BatchReportSoftwareUseTimeDto useTimeDto);
+    BaseResult<Void> batchReportSoftwareUseTime(BatchReportSoftwareUseTimeDto useTimeDto);
 
     /**
      * 近一周时间使用量统计
+     * @return 查询结果
+     */
+    BaseResult<WeekStatisticDo> weekStatistic();
+
+    /**
+     * 本年软件使用详情
      * @return 使用量统计
      */
-    WeekStatisticDo weekStatistic();
+    BaseResult<List<YearStatisticDo>> yearStatistic();
 
     /**
      * 本年每天软件的使用量统计
-     * @return 每一天的软件使用量
+     * @return 使用统计
      */
-    List<YearDateStatisticDo> yearDateStatistic();
+    BaseResult<List<YearDateStatisticDo>> yearDateStatistic();
 
 }
