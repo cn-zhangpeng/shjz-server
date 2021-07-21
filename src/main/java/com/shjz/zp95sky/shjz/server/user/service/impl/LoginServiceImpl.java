@@ -45,15 +45,12 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public BaseResult<LoginDo> login(LoginDto loginDto) {
         // 查询当前用户
-        log.info("search user");
         User user = userService.getUser();
 
         // 登录成功，生成 token
-        log.info("create token");
         String token = createToken(user);
 
         // redis 保存登录信息（一天）
-        log.info("save token to redis");
         saveAuthTokenToRedis(user.getId(), token);
 
         // 响应信息
