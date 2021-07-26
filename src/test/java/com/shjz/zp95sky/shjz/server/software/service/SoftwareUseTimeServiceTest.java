@@ -18,7 +18,7 @@ import java.util.Map;
 
 /**
  * 软件使用时间业务处理
- * @author 山海散客
+ * @author 山海紫穹
  * @date 2021年06月24日 16:57
  */
 @CommonTestAnnotation
@@ -31,23 +31,23 @@ public class SoftwareUseTimeServiceTest {
     @Test
     public void testBatchReportSoftwareUseTime() {
         Map<Long, Integer> params = new HashMap<Long, Integer>() {{
-            put(1407990753380143104L, 208); //IDEA
-            put(1407990753380143105L, 104); // Google Chrome
-            put(1412375884870062080L, 72); // HBuilder X
-            put(1407990753380143106L, 42); // WeChat
-            put(1408017039897006081L, 17); // DataGrip
-            put(1409482786942881792L, 10); // WebStorm
-            put(1407990753380143109L, 9); // Xshell
-            put(1409483181429755904L, 4); // Xftp
-            put(1408017039897006082L, 4); // Visual Studio Code
-            put(1407990753380143111L, 3); // 企业微信
-            put(1408016476153188352L, 3); // 终端
+            put(1407990753380143104L, 215); //IDEA
+            put(1407990753380143105L, 88); // Google Chrome
+            put(1407990753380143106L, 51); // WeChat
+            put(1412375884870062080L, 22); // HBuilder X
+            put(1409482786942881792L, 15); // WebStorm
+            put(1407990753380143109L, 13); // Xshell
+            put(1408368116253200384L, 4); // Typora
+            put(1408016476153188352L, 4); // 终端
+            put(1408017039897006081L, 3); // DataGrip
+            put(1407990753380143108L, 3); // Postman
+            put(1409483181429755904L, 2); // Xftp
+            put(1407990753380143111L, 1); // 企业微信
             put(1407990753380143107L, 1); // 腾讯QQ
-            put(1408368819264688128L, 1); // 网易邮箱大师
+            put(1408369150115581952L, 1); // 滴答清单
 
-//            put(1407990753380143108L, 3); // Postman
-//            put(1408368116253200384L, 2); // Typora
-//            put(1408369150115581952L, 2); // 滴答清单
+//            put(1408017039897006082L, 4); // Visual Studio Code
+//            put(1408368819264688128L, 1); // 网易邮箱大师
 //            put(1415270040378413056L, 1); // 墨刀
 //            put(1407990753380143110L, 1); // 有道云笔记
 //            put(1407990753380143112L, 2); // WPS Office

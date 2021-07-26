@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  * 软件使用时长 mapper 测试
- * @author 山海散客
+ * @author 山海紫穹
  * @date 2021年07月05日 14:17
  */
 @CommonTestAnnotation
