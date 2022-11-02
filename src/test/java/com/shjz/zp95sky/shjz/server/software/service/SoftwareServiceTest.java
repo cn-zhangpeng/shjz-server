@@ -21,7 +21,7 @@ public class SoftwareServiceTest {
 
     @Test
     public void testAddSoftware() {
-        String[] softwareArr = {"墨刀"};
+        String[] softwareArr = {"MindMaster"};
         List<AddSoftwareDto> softwareList = new ArrayList<>(softwareArr.length);
         for (String name : softwareArr) {
             softwareList.add(constructAddSoftwareDto(name));
