@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.shjz.zp95sky.shjz.server.common.response.BaseResult;
 import com.shjz.zp95sky.shjz.server.common.response.ResultUtil;
-import com.shjz.zp95sky.shjz.server.common.utils.LocalDateUtil;
+import com.shjz.zp95sky.shjz.server.common.utils.LocalDateTimeUtil;
 import com.shjz.zp95sky.shjz.server.software.domain.WeekStatisticDo;
 import com.shjz.zp95sky.shjz.server.software.domain.WeekStatisticUseTimeDo;
 import com.shjz.zp95sky.shjz.server.software.domain.YearDateStatisticDo;
@@ -33,7 +33,6 @@ import java.util.stream.Collectors;
 
 /**
  * @author 山海紫穹
- * @date 2021年06月23日 14:09
  */
 @Service
 @Slf4j
@@ -98,8 +97,8 @@ public class SoftwareUseTimeServiceImpl extends ServiceImpl<SoftwareUseTimeMappe
 
     @Override
     public BaseResult<List<YearStatisticDo>> yearStatistic() {
-        LocalDate startDate = LocalDateUtil.getFirstDayOfCurrentYear();
-        LocalDate endDate = LocalDateUtil.getLastDayOfCurrentYear();
+        LocalDate startDate = LocalDateTimeUtil.getFirstDayOfCurrentYear();
+        LocalDate endDate = LocalDateTimeUtil.getLastDayOfCurrentYear();
 
         // 使用时间统计
         List<SoftwareUseTimeStatistic> statisticData = useTimeMapper.selectYearStatistic(startDate, endDate);

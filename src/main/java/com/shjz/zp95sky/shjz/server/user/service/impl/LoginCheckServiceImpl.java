@@ -11,10 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-/**
- * @author 山海紫穹
- * @date 2021年03月25日 18:29
- */
 @Service
 @RequiredArgsConstructor(onConstructor = @__({ @Autowired}))
 public class LoginCheckServiceImpl implements LoginCheckService {

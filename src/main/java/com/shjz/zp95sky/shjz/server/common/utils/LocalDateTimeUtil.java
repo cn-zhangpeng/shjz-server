@@ -6,11 +6,10 @@ import java.time.temporal.TemporalAdjusters;
 /**
  * 日期处理工具类
  * @author 山海紫穹
- * @date 2021年07月21日 11:27
  */
-public class LocalDateUtil {
+public class LocalDateTimeUtil extends cn.hutool.core.date.LocalDateTimeUtil {
 
-    private LocalDateUtil() { }
+    private LocalDateTimeUtil() { }
 
     /**
      * 查询指定日期所在年的第一天日期

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- 根目录 -->
+    <property name="ROOT_PATH" value="./"/>
+    <!-- 日志根目录 -->
+    <property name="APP_DIR" value="logs"/>
+
+    <!-- INFO -->
+    <appender name="INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${ROOT_PATH}/${APP_DIR}/dijun.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${ROOT_PATH}/${APP_DIR}/dijun-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>50MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxHistory>3</maxHistory>
+        </rollingPolicy>
+        <append>true</append>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>[TRACEID:%X{traceId}] %d{yyyy-MM-dd HH:mm:ss.SSS} %-5level --- [%thread] %logger Line:%-3L - %msg%n</pattern>
+            <charset>utf-8</charset>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>info</level>
+        </filter>
+    </appender>
+
+    <!-- ConsoleAppender（控制台打印日志） -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- encoder: PatternLayoutEncoder -->
+        <withJansi>true</withJansi>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%red(%d{yyyy-MM-dd HH:mm:ss}) [%thread] %highlight(%-5level) %cyan(%logger{15}) - %highlight(%msg)
+                %n
+            </pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+    </appender>
+
+    <!-- FrameworkServlet 日志-->
+    <logger name="org.springframework" level="WARN"/>
+
+    <!-- mybatis 日志-->
+    <logger name="org.apache.ibatis" level="DEBUG"/>
+    <logger name="java.sql" level="DEBUG"/>
+
+    <!--  project 日志 -->
+    <logger name="com.zp95sky.dijun" level="DEBUG"/>
+
+    <!-- 生产环境设置为 INFO -->
+    <root level="STDOUT">
+        <appender-ref ref="INFO"/>
+        <!-- 生产环境删除 STDOUT appender -->
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+</configuration>
