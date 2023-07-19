@@ -19,8 +19,6 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * 解决 LocalTime、LocalDateTime、LocalDate 序列化反序列化问题
- * @author 山海紫穹
- * @date 2021年04月09日 12:31
  */
 @Configuration
 public class ObjectMapperConfig {

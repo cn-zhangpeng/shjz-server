@@ -2,8 +2,6 @@ package com.shjz.zp95sky.shjz.server.common.response;
 
 import com.shjz.zp95sky.shjz.server.common.enums.ResponseCodeEnum;
 
-import java.util.List;
-
 /**
  * 返回工具类
  * @author 山海紫穹

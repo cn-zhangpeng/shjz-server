@@ -24,6 +24,7 @@ public enum ResponseCodeEnum {
      */
     SUCCESS(200, "成功！"),
     ERROR_PARAMS(400, "参数错误！"),
+    PERMISSION_DENIED(401, "TOKEN失效！"),
     ERROR_SYSTEM_ERROR(500, "发生未知错误，请联系管理员！");
 
     private final Integer code;

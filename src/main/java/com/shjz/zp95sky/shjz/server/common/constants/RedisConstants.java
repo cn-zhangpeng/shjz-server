@@ -2,8 +2,6 @@ package com.shjz.zp95sky.shjz.server.common.constants;
 
 /**
  * Redis 常量
- * @author 山海紫穹
- * @date 2021年03月25日 13:25
  */
 public class RedisConstants {
 

@@ -72,7 +72,7 @@ public class LoginServiceImpl implements LoginService {
     }
 
     private String getLoginUserToken() {
-        return request.getHeader(Constants.JWT_HEADER_NAME);
+        return request.getHeader(Constants.TOKEN_HEADER_NAME);
     }
 
     private void saveAuthTokenToRedis(String token, User user) {
