@@ -1,4 +1,4 @@
-package com.shjz.zp95sky.shjz.server.user.service;
+package com.shjz.zp95sky.shjz.server.user.biz;
 
 import com.shjz.zp95sky.shjz.server.common.response.BaseResult;
 import com.shjz.zp95sky.shjz.server.user.domain.LoginDo;
@@ -6,11 +6,9 @@ import com.shjz.zp95sky.shjz.server.user.dto.LoginDto;
 import com.shjz.zp95sky.shjz.server.user.entity.User;
 
 /**
- *
- * @author zhangpeng
- * @date 2021/3/25 13:59
+ * 登录认证业务处理
  */
-public interface LoginService {
+public interface LoginBiz {
 
     /**
      * 登录请求

@@ -1,6 +1,7 @@
 package com.shjz.zp95sky.shjz.server.software.service;
 
 import com.shjz.zp95sky.shjz.server.annotation.CommonTestAnnotation;
+import com.shjz.zp95sky.shjz.server.software.biz.SoftwareBiz;
 import com.shjz.zp95sky.shjz.server.software.dto.AddSoftwareDto;
 import org.junit.jupiter.api.Test;
 
@@ -10,14 +11,12 @@ import java.util.List;
 
 /**
  * 软件业务测试类
- * @author 山海紫穹
- * @date 2021年06月24日 13:31
  */
 @CommonTestAnnotation
 public class SoftwareServiceTest {
 
     @Resource
-    private SoftwareService softwareService;
+    private SoftwareBiz softwareBiz;
 
     @Test
     public void testAddSoftware() {
@@ -26,7 +25,7 @@ public class SoftwareServiceTest {
         for (String name : softwareArr) {
             softwareList.add(constructAddSoftwareDto(name));
         }
-        softwareService.batchAddSoftware(softwareList);
+        softwareBiz.batchAddSoftware(softwareList);
     }
 
     private AddSoftwareDto constructAddSoftwareDto(String softwareName) {

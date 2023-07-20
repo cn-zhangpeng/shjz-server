@@ -20,7 +20,6 @@ public class Constants {
      * jwt
      */
     public static final String TOKEN_HEADER_NAME = "Authorization";
-    public static final String JWT_TOKEN_PRE = "Bearer ";
 
     /**
      * 文章

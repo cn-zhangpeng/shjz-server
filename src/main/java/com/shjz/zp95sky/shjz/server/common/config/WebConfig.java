@@ -24,7 +24,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(logInterceptor).order(Ordered.HIGHEST_PRECEDENCE);
-        registry.addInterceptor(authInterceptor).order(Ordered.HIGHEST_PRECEDENCE + 1);
+//        registry.addInterceptor(authInterceptor).order(Ordered.HIGHEST_PRECEDENCE + 1);
     }
 
     @Bean

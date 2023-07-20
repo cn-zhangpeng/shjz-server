@@ -13,11 +13,11 @@ import java.util.concurrent.TimeUnit;
  * @author zhangpeng
  */
 @Slf4j
-public class RedisUtil {
+public class CustomRedisUtil {
 
     private final RedissonClient redissonClient;
 
-    public RedisUtil(RedissonClient redissonClient) {
+    public CustomRedisUtil(RedissonClient redissonClient) {
         this.redissonClient = redissonClient;
     }
 

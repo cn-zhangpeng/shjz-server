@@ -1,7 +1,7 @@
 package com.shjz.zp95sky.shjz.server.blog.controller;
 
+import com.shjz.zp95sky.shjz.server.blog.biz.BlogStatisticsBiz;
 import com.shjz.zp95sky.shjz.server.blog.domain.ArticleStatisticsCountDayDo;
-import com.shjz.zp95sky.shjz.server.blog.service.BlogStatisticsService;
 import com.shjz.zp95sky.shjz.server.common.response.BaseResult;
 import com.shjz.zp95sky.shjz.server.common.response.ResultUtil;
 import io.swagger.annotations.Api;
@@ -23,12 +23,12 @@ import java.util.List;
 @RequiredArgsConstructor(onConstructor = @__({ @Autowired}))
 public class BlogStatisticsController {
 
-    private final BlogStatisticsService statisticsService;
+    private final BlogStatisticsBiz blogStatisticsBiz;
 
     @ApiOperation("文章数量天统计信息")
     @GetMapping(value = "/articleCount/day")
     public BaseResult<List<ArticleStatisticsCountDayDo>> getArticleCountDay() {
-        List<ArticleStatisticsCountDayDo> countDayDoList = statisticsService.getArticleStatisticsCountDay();
+        List<ArticleStatisticsCountDayDo> countDayDoList = blogStatisticsBiz.getArticleStatisticsCountDay();
         return ResultUtil.buildResultSuccess(countDayDoList);
     }
 

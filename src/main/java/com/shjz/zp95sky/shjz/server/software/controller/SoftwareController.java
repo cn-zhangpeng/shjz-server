@@ -1,9 +1,8 @@
 package com.shjz.zp95sky.shjz.server.software.controller;
 
 import com.shjz.zp95sky.shjz.server.common.response.BaseResult;
-import com.shjz.zp95sky.shjz.server.common.response.ResultUtil;
+import com.shjz.zp95sky.shjz.server.software.biz.SoftwareBiz;
 import com.shjz.zp95sky.shjz.server.software.domain.SoftwareListDo;
-import com.shjz.zp95sky.shjz.server.software.service.SoftwareService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +15,6 @@ import java.util.List;
 
 /**
  * @author 山海紫穹
- * @date 2021年07月01日 13:52
  */
 @Api(tags = "软件管理")
 @RestController
@@ -24,12 +22,12 @@ import java.util.List;
 @RequiredArgsConstructor(onConstructor = @__({ @Autowired}))
 public class SoftwareController {
 
-    private final SoftwareService softwareService;
+    private final SoftwareBiz softwareBiz;
 
     @ApiOperation("查询软件列表")
     @GetMapping("/list")
     public BaseResult<List<SoftwareListDo>> list() {
-        return softwareService.getSoftwareList();
+        return softwareBiz.getSoftwareList();
     }
 
 }

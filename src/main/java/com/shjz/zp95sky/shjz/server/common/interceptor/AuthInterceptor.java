@@ -3,10 +3,11 @@ package com.shjz.zp95sky.shjz.server.common.interceptor;
 import cn.hutool.core.text.AntPathMatcher;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shjz.zp95sky.shjz.server.common.constants.Constants;
+import com.shjz.zp95sky.shjz.server.common.constants.RedisConstants;
 import com.shjz.zp95sky.shjz.server.common.enums.ResponseCodeEnum;
 import com.shjz.zp95sky.shjz.server.common.response.BaseResult;
 import com.shjz.zp95sky.shjz.server.common.response.ResultUtil;
-import com.shjz.zp95sky.shjz.server.common.utils.RedisUtil;
+import com.shjz.zp95sky.shjz.server.common.utils.CustomRedisUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,7 +28,7 @@ import java.util.List;
 @RequiredArgsConstructor(onConstructor = @__({ @Autowired}))
 public class AuthInterceptor implements HandlerInterceptor {
 
-    private final RedisUtil redisUtil;
+    private final CustomRedisUtil redisUtil;
     private final ObjectMapper objectMapper;
 
     @Value("${auth.ignore-urls}")
@@ -37,13 +38,13 @@ public class AuthInterceptor implements HandlerInterceptor {
     public boolean preHandle(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler) throws IOException {
 
         // 白名单，直接放行
-        String requestUri = request.getRequestURI();
-        if (checkUrls(ignoreUrls, requestUri)) {
+        String path = request.getRequestURI().replace(request.getContextPath(), Constants.STRING_DATA_DEFAULT);
+        if (checkUrls(ignoreUrls, path)) {
             return true;
         }
 
         String token = request.getHeader(Constants.TOKEN_HEADER_NAME);
-        boolean existToken = redisUtil.exists(token);
+        boolean existToken = redisUtil.exists(RedisConstants.OPERATOR_AUTH_TOKEN_PRE + token);
         if (existToken) {
             return true;
         }

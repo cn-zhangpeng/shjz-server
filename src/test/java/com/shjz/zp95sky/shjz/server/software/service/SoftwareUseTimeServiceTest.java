@@ -2,6 +2,7 @@ package com.shjz.zp95sky.shjz.server.software.service;
 
 import com.shjz.zp95sky.shjz.server.annotation.CommonTestAnnotation;
 import com.shjz.zp95sky.shjz.server.common.response.BaseResult;
+import com.shjz.zp95sky.shjz.server.software.biz.SoftwareUseTimeBiz;
 import com.shjz.zp95sky.shjz.server.software.domain.WeekStatisticDo;
 import com.shjz.zp95sky.shjz.server.software.domain.WeekStatisticUseTimeDo;
 import com.shjz.zp95sky.shjz.server.software.dto.BatchReportSoftwareUseTimeDetailDto;
@@ -18,15 +19,13 @@ import java.util.Map;
 
 /**
  * 软件使用时间业务处理
- * @author 山海紫穹
- * @date 2021年06月24日 16:57
  */
 @CommonTestAnnotation
 @Slf4j
 public class SoftwareUseTimeServiceTest {
 
     @Resource
-    private SoftwareUseTimeService useTimeService;
+    private SoftwareUseTimeBiz useTimeBiz;
 
     @Test
     public void testBatchReportSoftwareUseTime() {
@@ -68,12 +67,12 @@ public class SoftwareUseTimeServiceTest {
 //            put(1409830145539313664L, 1); // Another Redis Desktop Manager
         }};
         BatchReportSoftwareUseTimeDto useTimeDto = constructBatchSoftwareUseTimeDto(params);
-        useTimeService.batchReportSoftwareUseTime(useTimeDto);
+        useTimeBiz.batchReportSoftwareUseTime(useTimeDto);
     }
 
     @Test
     public void testWeekStatistic() {
-        BaseResult<WeekStatisticDo> result = useTimeService.weekStatistic();
+        BaseResult<WeekStatisticDo> result = useTimeBiz.weekStatistic();
         log.info("date list: {}", result.getData().getDateList().toArray());
         for (WeekStatisticUseTimeDo useTimeDo : result.getData().getUseTimeDoList()) {
             log.info("{} use time: {}.", useTimeDo.getSoftwareName(), useTimeDo.getUseTimeList().toArray());

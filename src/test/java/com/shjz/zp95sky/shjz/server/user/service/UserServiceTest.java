@@ -1,6 +1,8 @@
 package com.shjz.zp95sky.shjz.server.user.service;
 
 import com.shjz.zp95sky.shjz.server.annotation.CommonTestAnnotation;
+import com.shjz.zp95sky.shjz.server.common.response.BaseResult;
+import com.shjz.zp95sky.shjz.server.user.biz.UserBiz;
 import com.shjz.zp95sky.shjz.server.user.domain.UserDo;
 import org.junit.jupiter.api.Test;
 
@@ -14,12 +16,12 @@ import javax.annotation.Resource;
 public class UserServiceTest {
 
     @Resource
-    private UserService userService;
+    private UserBiz userBiz;
 
     @Test
     public void testGetByPrimaryKey() {
-        UserDo user = userService.getUserInfo();
-        System.out.println(user);
+        BaseResult<UserDo> userInfo = userBiz.getUserInfo();
+        System.out.println(userInfo);
     }
 
 }

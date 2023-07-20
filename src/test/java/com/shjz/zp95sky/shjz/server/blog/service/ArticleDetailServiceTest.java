@@ -1,6 +1,7 @@
 package com.shjz.zp95sky.shjz.server.blog.service;
 
 import com.shjz.zp95sky.shjz.server.annotation.CommonTestAnnotation;
+import com.shjz.zp95sky.shjz.server.blog.biz.ArticleDetailBiz;
 import com.shjz.zp95sky.shjz.server.blog.domain.ArticleDetailDo;
 import com.shjz.zp95sky.shjz.server.blog.domain.ArticleListDo;
 import com.shjz.zp95sky.shjz.server.common.entity.CustomPage;
@@ -19,12 +20,12 @@ import java.util.List;
 public class ArticleDetailServiceTest {
 
     @Resource
-    private ArticleDetailService articleDetailService;
+    private ArticleDetailBiz articleDetailBiz;
 
     @Test
     public void testGetArticleList() {
         CustomPage customPage = CustomPage.builder().page(1).pageSize(10).build();
-        BaseResult<List<ArticleListDo>> result = articleDetailService.getArticleList(customPage);
+        BaseResult<List<ArticleListDo>> result = articleDetailBiz.getArticleList(customPage);
 
         printArticleListInfo(result);
     }
@@ -32,14 +33,14 @@ public class ArticleDetailServiceTest {
     @Test
     public void testGetArticleListByCategory() {
         CustomPage customPage = CustomPage.builder().page(1).pageSize(10).build();
-        BaseResult<List<ArticleListDo>> result = articleDetailService.getArticleListByCategory(1558686897201L, customPage);
+        BaseResult<List<ArticleListDo>> result = articleDetailBiz.getArticleListByCategory(1558686897201L, customPage);
 
         printArticleListInfo(result);
     }
 
     @Test
     public void testGetArticleById() {
-        BaseResult<ArticleDetailDo> result = articleDetailService.getArticleById(1L);
+        BaseResult<ArticleDetailDo> result = articleDetailBiz.getArticleById(1L);
         System.out.println(result);
     }
 

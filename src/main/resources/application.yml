@@ -88,3 +88,6 @@ knife4j:
     home-custom-location: classpath:markdown/home.md
     enable-footer-custom: true
     footer-custom-content: Apache License 2.0
+
+auth:
+  ignore-urls: /login

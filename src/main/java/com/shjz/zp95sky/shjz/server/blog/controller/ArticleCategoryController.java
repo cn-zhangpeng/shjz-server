@@ -1,9 +1,9 @@
 package com.shjz.zp95sky.shjz.server.blog.controller;
 
+import com.shjz.zp95sky.shjz.server.blog.biz.ArticleCategoryBiz;
 import com.shjz.zp95sky.shjz.server.blog.domain.ArticleCategoryListDo;
 import com.shjz.zp95sky.shjz.server.blog.dto.AddCategoryDto;
 import com.shjz.zp95sky.shjz.server.blog.dto.UpdateCategoryDto;
-import com.shjz.zp95sky.shjz.server.blog.service.ArticleCategoryService;
 import com.shjz.zp95sky.shjz.server.common.response.BaseResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -23,32 +23,32 @@ import java.util.List;
 @RequiredArgsConstructor(onConstructor = @__({ @Autowired}))
 public class ArticleCategoryController {
 
-    private final ArticleCategoryService categoryService;
+    private final ArticleCategoryBiz categoryBiz;
 
     @ApiOperation("查询所有文章类型")
     @GetMapping("/list")
     public BaseResult<List<ArticleCategoryListDo>> getCategoryList() {
-        return categoryService.getCategoryList();
+        return categoryBiz.getCategoryList();
     }
 
     @ApiOperation("更新文章类型")
     @ApiImplicitParam(name = "categoryId", value = "文章类型ID", required = true, paramType = "path", dataTypeClass = String.class)
     @PutMapping("/{categoryId}")
     public BaseResult<Void> updateCategory(@PathVariable Long categoryId, @RequestBody UpdateCategoryDto categoryDto) {
-        return categoryService.updateCategory(categoryId, categoryDto);
+        return categoryBiz.updateCategory(categoryId, categoryDto);
     }
 
     @ApiImplicitParam(name = "categoryId", value = "文章类型ID", required = true, paramType = "path", dataTypeClass = String.class)
     @ApiOperation("删除文章类型")
     @DeleteMapping(value = "/{categoryId}")
     public BaseResult<Void> deleteCategory(@PathVariable Long categoryId) {
-        return categoryService.deleteCategory(categoryId);
+        return categoryBiz.deleteCategory(categoryId);
     }
 
     @ApiOperation("添加文章类型")
     @PostMapping
     public BaseResult<Void> addCategory(@RequestBody AddCategoryDto categoryDto) {
-        return categoryService.addCategory(categoryDto);
+        return categoryBiz.addCategory(categoryDto);
     }
 
 }

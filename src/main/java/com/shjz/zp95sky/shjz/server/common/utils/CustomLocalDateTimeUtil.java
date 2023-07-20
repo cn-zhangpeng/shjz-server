@@ -7,9 +7,9 @@ import java.time.temporal.TemporalAdjusters;
  * 日期处理工具类
  * @author 山海紫穹
  */
-public class LocalDateTimeUtil extends cn.hutool.core.date.LocalDateTimeUtil {
+public class CustomLocalDateTimeUtil extends cn.hutool.core.date.LocalDateTimeUtil {
 
-    private LocalDateTimeUtil() { }
+    private CustomLocalDateTimeUtil() { }
 
     /**
      * 查询指定日期所在年的第一天日期

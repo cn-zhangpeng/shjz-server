@@ -1,6 +1,6 @@
 package com.shjz.zp95sky.shjz.server.common.config;
 
-import com.shjz.zp95sky.shjz.server.common.utils.RedisUtil;
+import com.shjz.zp95sky.shjz.server.common.utils.CustomRedisUtil;
 import org.redisson.api.RedissonClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,8 +12,8 @@ import org.springframework.context.annotation.Configuration;
 public class RedisConfig {
 
     @Bean
-    public RedisUtil redisUtil(RedissonClient redissonClient) {
-        return new RedisUtil(redissonClient);
+    public CustomRedisUtil redisUtil(RedissonClient redissonClient) {
+        return new CustomRedisUtil(redissonClient);
     }
 
 }

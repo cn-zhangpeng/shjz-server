@@ -1,6 +1,7 @@
 package com.shjz.zp95sky.shjz.server.blog.service;
 
 import com.shjz.zp95sky.shjz.server.annotation.CommonTestAnnotation;
+import com.shjz.zp95sky.shjz.server.blog.biz.BlogStatisticsBiz;
 import com.shjz.zp95sky.shjz.server.blog.domain.ArticleStatisticsCountDayDo;
 import org.junit.jupiter.api.Test;
 
@@ -15,11 +16,11 @@ import java.util.List;
 public class BlogStatisticsServiceTest {
 
     @Resource
-    private BlogStatisticsService statisticsService;
+    private BlogStatisticsBiz statisticsBiz;
 
     @Test
     public void testGetArticleStatisticsCountDay() {
-        List<ArticleStatisticsCountDayDo> articleStatisticsCountDayDoList = statisticsService.getArticleStatisticsCountDay();
+        List<ArticleStatisticsCountDayDo> articleStatisticsCountDayDoList = statisticsBiz.getArticleStatisticsCountDay();
         System.out.println("period: day, size: " + articleStatisticsCountDayDoList.size());
     }
 

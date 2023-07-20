@@ -1,49 +1,18 @@
 package com.shjz.zp95sky.shjz.server.user.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.shjz.zp95sky.shjz.server.user.domain.UserAllDo;
-import com.shjz.zp95sky.shjz.server.user.domain.UserDo;
-import com.shjz.zp95sky.shjz.server.user.dto.ResetPasswordDto;
-import com.shjz.zp95sky.shjz.server.user.dto.UserAllDto;
 import com.shjz.zp95sky.shjz.server.user.entity.User;
 
 /**
- * 用户业务处理接口
- * @author 山海紫穹
+ * 用户数据处理
  */
 public interface UserService extends IService<User> {
 
     /**
-     * 查询用户信息
-     * @return {@link UserDo} 用户信息
+     * 根据用户名查询用户信息
+     * @param username 用户名
+     * @return 用户信息
      */
-    UserDo getUserInfo();
-
-    /**
-     * 查询用户原始信息
-     * @return {@link User} 用户信息
-     */
-    User getUser();
-
-    /**
-     * 查询用户全部信息
-     * @return {@link UserAllDo} 用户全部信息
-     */
-    UserAllDo getUserAllInfo();
-
-    /**
-     * 更新用户信息
-     * @param userDto 用户信息
-     * @return 更新成功，返回 true，否则返回 false
-     */
-    boolean updateUserInfo(UserAllDto userDto);
-
-    /**
-     * 更新登录密码
-     * @param userId 用户 ID
-     * @param passwordDto 用户密码信息
-     * @return 更新成功，返回 true，否则返回 false
-     */
-    boolean resetPassword(Long userId, ResetPasswordDto passwordDto);
+    User getByUsername(String username);
 
 }

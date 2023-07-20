@@ -1,7 +1,7 @@
 package com.shjz.zp95sky.shjz.server.software.mapper;
 
 import com.shjz.zp95sky.shjz.server.annotation.CommonTestAnnotation;
-import com.shjz.zp95sky.shjz.server.common.utils.LocalDateTimeUtil;
+import com.shjz.zp95sky.shjz.server.common.utils.CustomLocalDateTimeUtil;
 import com.shjz.zp95sky.shjz.server.software.domain.YearDateStatisticDo;
 import com.shjz.zp95sky.shjz.server.software.entity.SoftwareUseTimeStatistic;
 import lombok.extern.slf4j.Slf4j;
@@ -34,8 +34,8 @@ public class SoftwareUseTimeMapperTest {
 
     @Test
     public void testSelectYearStatistic() {
-        LocalDate startDate = LocalDateTimeUtil.getFirstDayOfCurrentYear();
-        LocalDate endDate = LocalDateTimeUtil.getLastDayOfCurrentYear();
+        LocalDate startDate = CustomLocalDateTimeUtil.getFirstDayOfCurrentYear();
+        LocalDate endDate = CustomLocalDateTimeUtil.getLastDayOfCurrentYear();
 
         List<SoftwareUseTimeStatistic> statisticData = useTimeMapper.selectYearStatistic(startDate, endDate);
         for (SoftwareUseTimeStatistic s : statisticData) {

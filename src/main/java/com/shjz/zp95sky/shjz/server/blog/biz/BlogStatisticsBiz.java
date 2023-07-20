@@ -1,14 +1,13 @@
-package com.shjz.zp95sky.shjz.server.blog.service;
+package com.shjz.zp95sky.shjz.server.blog.biz;
 
 import com.shjz.zp95sky.shjz.server.blog.domain.ArticleStatisticsCountDayDo;
 
 import java.util.List;
 
 /**
- * 博客统计业务接口
- * @author 山海紫穹
+ * 博客统计业务
  */
-public interface BlogStatisticsService {
+public interface BlogStatisticsBiz {
 
     /**
      * 查询文章天汇总信息

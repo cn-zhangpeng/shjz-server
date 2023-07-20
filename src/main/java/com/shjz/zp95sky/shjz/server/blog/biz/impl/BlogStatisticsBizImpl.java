@@ -1,10 +1,10 @@
-package com.shjz.zp95sky.shjz.server.blog.service.impl;
+package com.shjz.zp95sky.shjz.server.blog.biz.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.shjz.zp95sky.shjz.server.blog.biz.BlogStatisticsBiz;
 import com.shjz.zp95sky.shjz.server.blog.domain.ArticleStatisticsCountDayDo;
 import com.shjz.zp95sky.shjz.server.blog.entity.ArticleDetail;
 import com.shjz.zp95sky.shjz.server.blog.service.ArticleDetailService;
-import com.shjz.zp95sky.shjz.server.blog.service.BlogStatisticsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,13 +15,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * 博客统计业务实现
- * @author 山海紫穹
- */
 @Service
 @RequiredArgsConstructor(onConstructor = @__({ @Autowired}))
-public class BlogStatisticsServiceImpl implements BlogStatisticsService {
+public class BlogStatisticsBizImpl implements BlogStatisticsBiz {
 
     private final ArticleDetailService detailService;
 

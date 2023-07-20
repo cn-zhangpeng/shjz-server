@@ -1,6 +1,7 @@
 package com.shjz.zp95sky.shjz.server.blog.service;
 
 import com.shjz.zp95sky.shjz.server.annotation.CommonTestAnnotation;
+import com.shjz.zp95sky.shjz.server.blog.biz.ArticleCategoryBiz;
 import com.shjz.zp95sky.shjz.server.blog.domain.ArticleCategoryListDo;
 import com.shjz.zp95sky.shjz.server.common.response.BaseResult;
 import org.junit.jupiter.api.Test;
@@ -16,11 +17,11 @@ import java.util.List;
 public class ArticleCategoryServiceTest {
 
     @Resource
-    private ArticleCategoryService categoryService;
+    private ArticleCategoryBiz categoryBiz;
 
     @Test
     public void testGetCategoryList() {
-        BaseResult<List<ArticleCategoryListDo>> result = categoryService.getCategoryList();
+        BaseResult<List<ArticleCategoryListDo>> result = categoryBiz.getCategoryList();
         result.getData().forEach(System.out::println);
     }
 
